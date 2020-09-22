@@ -53,7 +53,6 @@ public class CircleComponent : MonoBehaviour
 
     private void SetTransformDefaultState()
     {
-        //transform.position = new Vector3(0,1f,0);
         transform.Rotate(90f, 0f, 0f);
     }
 }
