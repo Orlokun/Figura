@@ -12,7 +12,7 @@ public struct Circle
     [Range(0, 10)]
     public float yRadius;
 
-    public Circle(int _segments, int _xRadius, int _yRadius)
+    public Circle(int _segments, float _xRadius, float _yRadius)
     {
         segments = _segments;
         xRadius = _xRadius;
@@ -23,7 +23,7 @@ public struct Circle
 public class RangesVisualizer : MonoBehaviour
 {
     [SerializeField]
-    private int maxRadius = 10;
+    private float maxRadius;
     [Range(0, 50)]
     public int segments = 50;
     [Range(0, 10)]
@@ -31,10 +31,8 @@ public class RangesVisualizer : MonoBehaviour
     [Range(0, 10)]
     private float yRadius;
 
-
-    private int numberOfRanges;
+    public int numberOfRanges;
     public Circle[] circles;
-
 
     void Start()
     {
@@ -50,7 +48,6 @@ public class RangesVisualizer : MonoBehaviour
         if (numberOfRanges == 0)
         {
             Debug.LogError("There is no amount of ranges assigned. Will proceed to Default");
-            checkRangeAmount = false;
         }
         else
         {
@@ -70,7 +67,6 @@ public class RangesVisualizer : MonoBehaviour
         {
             SetDefaultValues();
         }
-
     }
 
     void CreateCircles()
@@ -79,10 +75,11 @@ public class RangesVisualizer : MonoBehaviour
 
         for (int i = 0; i < circles.Length; i++)
         {
-            int rangeRadius = (maxRadius / circles.Length) * (i + 1);
+            float rangeRadius = maxRadius / numberOfRanges * (i + 1);
             circles[i] = new Circle(segments, rangeRadius, rangeRadius);
             CircleComponent cComponent = InstantiateCircle(circles[i]);
             cComponent.DrawCircleLine();
+            cComponent.transform.SetParent(gameObject.transform);
         }
     }
 
@@ -100,6 +97,7 @@ public class RangesVisualizer : MonoBehaviour
     {
         return numberOfRanges;
     }
+
     void SetDefaultValues()
     {
         numberOfRanges = 5;
@@ -108,7 +106,7 @@ public class RangesVisualizer : MonoBehaviour
 
     CircleComponent InstantiateCircle(Circle _circle)
     {
-        GameObject circle = (GameObject)Instantiate(Resources.Load("RangeCircle"));                 //Check hardcoded name
+        GameObject circle = (GameObject)Instantiate(Resources.Load("RangesPrefabs/RangeCircle"));                 //Check hardcoded name
         CircleComponent _cComponent = circle.GetComponent<CircleComponent>();
         _cComponent.SetCircleData(_circle);
         return _cComponent;

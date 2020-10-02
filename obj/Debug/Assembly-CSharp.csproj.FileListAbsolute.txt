@@ -538,3 +538,9 @@ C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\UnityEngine.TestRunne
 C:\Users\GMR User\Documents\GitGames\figura\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 C:\Users\GMR User\Documents\GitGames\figura\obj\Debug\Assembly-CSharp.dll
 C:\Users\GMR User\Documents\GitGames\figura\obj\Debug\Assembly-CSharp.pdb
+C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Unity.ProGrids.dll
+C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Unity.ProGrids.Editor.dll
+C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Unity.Settings.Editor.dll
+C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Unity.ProGrids.pdb
+C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Unity.ProGrids.Editor.pdb
+C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Unity.Settings.Editor.pdb
