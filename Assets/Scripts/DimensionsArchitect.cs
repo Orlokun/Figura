@@ -21,100 +21,30 @@ public class DimensionsArchitect : MonoBehaviour
     private float maxRadius;
     private float angleRate;
 
-    DimensionComponent[] dimensions;
     RangesVisualizer rVisualizer;
 
     Quaternion centralRotation;
     Vector3 centralPosition;
 
-    Vector3[] dimensionsPositions;
 
-    List<DataUnit> availableDataUnits = new List<DataUnit>();
-    GameObject dUnitObj;
-    DataUnit dUnit;
+    DataUnitsManager dUnitsManager;
+
+
 
     void Awake()
     {
         rVisualizer = FindObjectOfType<RangesVisualizer>();
+        dUnitsManager = FindObjectOfType<DataUnitsManager>();
         maxRadius = rVisualizer.GetMaxRadius();
         centralPosition = transform.position;
         centralRotation = transform.rotation;
         DrawGuideLinesforDimension();
     }
 
-    private float GetangleRate(int numberOfDimensions)
+    public float GetangleRate(int numberOfDimensions)
     {
         return 360 / numberOfDimensions;
     }
-
-    void DimensionsLineBuilder()
-    {
-        /*lRenderer.SetPositions(dimensionsPositions);
-        lRenderer.startWidth = .1f;
-        lRenderer.endWidth = .1f;*/
-    }
-
-    void DrawConnectingLine(int _dimAmount)
-    {
-        for (int i = 0; i < _dimAmount; i++)
-        {
-            float dist;
-
-            if (i++ >= _dimAmount)
-            {
-                dist = Vector3.Distance(dimensionsPositions[i], dimensionsPositions[0]);
-            }
-            else
-            {
-                dist = Vector3.Distance(dimensionsPositions[i], dimensionsPositions[i + 1]);
-            }
-        }
-    }
-
-    public void AddSatisticsUnit()
-    {
-        SetParentObjectAndData();
-        InstantiateDimensionObjects(dUnitObj, dUnit);
-
-        LineRenderer lRenderer = dUnitObj.GetComponent<LineRenderer>();
-        lRenderer.positionCount = numberOfDimensions;
-
-        lRenderer.startWidth = 0.1f;
-        lRenderer.endWidth = 0.1f;
-        lRenderer.SetPositions(dimensionsPositions);
-    }
-    private void SetParentObjectAndData()
-    {
-        dUnits++;
-        dUnitObj = (GameObject)Instantiate(Resources.Load("UnitPrefabs/DataUnit"));
-        dUnit = dUnitObj.GetComponent<DataUnit>();
-        dUnitObj.name = "DataUnit" + dUnits.ToString();
-        dUnit.ObjectReceiveData(numberOfDimensions, minScore, maxScore);
-        availableDataUnits.Add(dUnit);
-    }
-
-    private void InstantiateDimensionObjects(GameObject _dObject, DataUnit _unit)
-    {
-        dimensionsPositions = new Vector3[numberOfDimensions];
-        angleRate = GetangleRate(numberOfDimensions);
-        int[] dimensionsAchievements = _unit.ReturnAchievements();
-
-        for (int i = 0; i < numberOfDimensions; i++)
-        {
-            Quaternion rotation = Quaternion.AngleAxis(i * angleRate, Vector3.up);
-            Vector3 direction = rotation * Vector3.forward;
-
-            int dimAchievement = dimensionsAchievements[i];
-            float radius = GetRatiusBasedOnPercentageOfAchievement(maxRadius, dimAchievement, maxScore);
-            Vector3 dimensionPosition = centralPosition + (direction * radius);
-
-
-            dimensionsPositions[i] = dimensionPosition;
-            GameObject testObject = (GameObject)Instantiate(Resources.Load("UnitPrefabs/TestObject"), dimensionPosition, centralRotation);
-            testObject.transform.SetParent(_dObject.transform);
-        }
-    }
-
 
     private void DrawGuideLinesforDimension()
     {
@@ -126,64 +56,66 @@ public class DimensionsArchitect : MonoBehaviour
             Quaternion rotation = Quaternion.AngleAxis(i * angleRate, Vector3.up);
             Vector3 direction = rotation * Vector3.forward;
 
-            float radius = GetRatiusBasedOnPercentageOfAchievement(maxRadius, maxScore * 1.1f, maxScore);
+            float radius = GetRatiusBasedOnPercentageOfAchievement(maxScore * 1.1f);
             Vector3 lineEnd = centralPosition + (direction * radius);
 
             GameObject lineObject = (GameObject)Instantiate(Resources.Load("RangesPrefabs/DimLine"), rVisualizer.transform.position, centralRotation);
             lineObject.transform.SetParent(gLinesObj.transform);
 
-            LineRenderer line = lineObject.GetComponent<LineRenderer>();
-
-            line.startWidth = 0.07f;
-            line.endWidth = 0.07f;
-            line.SetPosition(0, gLinesObj.transform.position);
-            line.SetPosition(1, lineEnd);
+            DrawLine(lineObject, lineEnd);
         }
     }
 
-
-    Vector3 GetDimensionPosition(Vector3 _cPosition, float newRotation, float radius)
+    #region Getters
+    public int GetNumberOfDimensionsEvaluated()
     {
-        float ang = centralRotation.y + newRotation;
-
-        Vector3 pos;
-        pos.x = _cPosition.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
-        pos.y = _cPosition.y;
-        pos.z = _cPosition.z + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
-
-        return pos;
+        return numberOfDimensions;
     }
 
-    float GetRatiusBasedOnPercentageOfAchievement(float maxRadius, float score, float maxScore)
+    public int GetMinValue()
     {
-        return maxRadius * (score / maxScore);
+        return minScore;
     }
 
-    public void FilterDataRange(float minVal, float maxVal)
+    public int GetMaxScore()
     {
-        foreach (DataUnit unit in availableDataUnits)
-        {
-            if (unit.gameObject.activeInHierarchy)
-            {
-                foreach (int unitScore in unit.ReturnAchievements())
-                {
-                    if (unitScore > maxVal || unitScore < minVal)
-                    {
-                        unit.gameObject.SetActive(false);
-                    }
-                }
-            }
-            else if (!unit.gameObject.activeInHierarchy)
-            {
-                foreach (int unitScore in unit.ReturnAchievements())
-                {
-                    if (unitScore <= maxVal && unitScore >= minVal)
-                    {
-                        unit.gameObject.SetActive(true);
-                    }
-                }
-            }
-        }
+        return maxScore;
     }
+
+    public Vector3 GetCentralPosition()
+    {
+        return centralPosition;
+    }
+
+    public Quaternion GetCentralRotation()
+    {
+        return centralRotation;
+    }
+
+    public float GetRatiusBasedOnPercentageOfAchievement(float _score)
+    {
+        return maxRadius * (_score / maxScore);
+    }
+    #endregion
+
+    private void DrawLine(GameObject _lineObject, Vector3 _lineEnd)
+    {
+        LineRenderer line = _lineObject.GetComponent<LineRenderer>();
+
+        line.startWidth = 0.07f;
+        line.endWidth = 0.07f;
+        line.SetPosition(0, _lineObject.transform.position);
+        line.SetPosition(1, _lineEnd);
+    }
+
+    private void DrawLine(GameObject _lineObject, Vector3[] _linePositions)
+    {
+        LineRenderer line = _lineObject.GetComponent<LineRenderer>();
+
+        line.startWidth = 0.07f;
+        line.endWidth = 0.07f;
+        line.SetPositions(_linePositions);
+    }
+   
 }
 

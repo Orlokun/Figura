@@ -62,18 +62,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\CircleComponent.cs" />
-    <Compile Include="Assets\Scripts\DataUnit.cs" />
-    <Compile Include="Assets\Scripts\DimensionComponent.cs" />
+    <Compile Include="Assets\Scripts\DataUnits\DataUnit.cs" />
+    <Compile Include="Assets\Scripts\DataUnitsManager.cs" />
     <Compile Include="Assets\Scripts\DimensionsArchitect.cs" />
-    <Compile Include="Assets\Scripts\MaximumSlider.cs" />
-    <Compile Include="Assets\Scripts\MinimumSlider.cs" />
-    <Compile Include="Assets\Scripts\RangeGenerator.cs" />
+    <Compile Include="Assets\Scripts\RangesManagers\CircleComponent.cs" />
+    <Compile Include="Assets\Scripts\RangesManagers\RangeGenerator.cs" />
+    <Compile Include="Assets\Scripts\SlideHandler.cs" />
     <Compile Include="Assets\Scripts\TestScripts\TestLineanimator.cs" />
-    <Compile Include="Assets\Scripts\UIController.cs" />
-    <Compile Include="Assets\Scripts\UIGridRenderer.cs" />
-    <Compile Include="Assets\SlideHandler.cs" />
-    <Compile Include="Assets\TwoValueRangeSlider.cs" />
+    <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\VisualizationScripts\RangesVisualizer.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.11f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
