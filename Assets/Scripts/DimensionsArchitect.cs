@@ -28,7 +28,10 @@ public class DimensionsArchitect : MonoBehaviour
     Vector3 centralPosition;
 
     Vector3[] dimensionsPositions;
-    // Start is called before the first frame update
+
+    List<DataUnit> availableDataUnits = new List<DataUnit>();
+    GameObject dUnitObj;
+    DataUnit dUnit;
 
     void Awake()
     {
@@ -70,44 +73,46 @@ public class DimensionsArchitect : MonoBehaviour
 
     public void AddSatisticsUnit()
     {
-        DataUnit unit = new DataUnit(numberOfDimensions, minScore, maxScore);
-        InstantiateDimensionObjects(unit.ReturnAchievements());
-        //DimensionsLineBuilder();
-        //DrawConnectingLine(_dimNumber);
-    }
+        SetParentObjectAndData();
+        InstantiateDimensionObjects(dUnitObj, dUnit);
 
-    private void InstantiateDimensionObjects(int[] achievements)
+        LineRenderer lRenderer = dUnitObj.GetComponent<LineRenderer>();
+        lRenderer.positionCount = numberOfDimensions;
+
+        lRenderer.startWidth = 0.1f;
+        lRenderer.endWidth = 0.1f;
+        lRenderer.SetPositions(dimensionsPositions);
+    }
+    private void SetParentObjectAndData()
     {
         dUnits++;
+        dUnitObj = (GameObject)Instantiate(Resources.Load("UnitPrefabs/DataUnit"));
+        dUnit = dUnitObj.GetComponent<DataUnit>();
+        dUnitObj.name = "DataUnit" + dUnits.ToString();
+        dUnit.ObjectReceiveData(numberOfDimensions, minScore, maxScore);
+        availableDataUnits.Add(dUnit);
+    }
+
+    private void InstantiateDimensionObjects(GameObject _dObject, DataUnit _unit)
+    {
         dimensionsPositions = new Vector3[numberOfDimensions];
         angleRate = GetangleRate(numberOfDimensions);
-
-        GameObject dUnit = (GameObject)Instantiate(Resources.Load("UnitPrefabs/DataUnit"));
-        dUnit.name = "DataUnit" + dUnits.ToString();
-
-        LineRenderer lRenderer = dUnit.GetComponent<LineRenderer>();
-        lRenderer.positionCount = numberOfDimensions;
-        Vector3[] dimPositions = new Vector3[numberOfDimensions];
+        int[] dimensionsAchievements = _unit.ReturnAchievements();
 
         for (int i = 0; i < numberOfDimensions; i++)
         {
             Quaternion rotation = Quaternion.AngleAxis(i * angleRate, Vector3.up);
             Vector3 direction = rotation * Vector3.forward;
-            int dimensionAchievement = achievements[i];
 
-            float radius = GetRatiusBasedOnPercentageOfAchievement(maxRadius, dimensionAchievement, maxScore);
+            int dimAchievement = dimensionsAchievements[i];
+            float radius = GetRatiusBasedOnPercentageOfAchievement(maxRadius, dimAchievement, maxScore);
             Vector3 dimensionPosition = centralPosition + (direction * radius);
-            dimPositions[i] = dimensionPosition;
 
 
             dimensionsPositions[i] = dimensionPosition;
             GameObject testObject = (GameObject)Instantiate(Resources.Load("UnitPrefabs/TestObject"), dimensionPosition, centralRotation);
-            testObject.transform.SetParent(dUnit.transform);
+            testObject.transform.SetParent(_dObject.transform);
         }
-
-        lRenderer.startWidth = 0.1f;
-        lRenderer.endWidth = 0.1f;
-        lRenderer.SetPositions(dimPositions);
     }
 
 
@@ -154,6 +159,31 @@ public class DimensionsArchitect : MonoBehaviour
         return maxRadius * (score / maxScore);
     }
 
-
+    public void FilterDataRange(float minVal, float maxVal)
+    {
+        foreach (DataUnit unit in availableDataUnits)
+        {
+            if (unit.gameObject.activeInHierarchy)
+            {
+                foreach (int unitScore in unit.ReturnAchievements())
+                {
+                    if (unitScore > maxVal || unitScore < minVal)
+                    {
+                        unit.gameObject.SetActive(false);
+                    }
+                }
+            }
+            else if (!unit.gameObject.activeInHierarchy)
+            {
+                foreach (int unitScore in unit.ReturnAchievements())
+                {
+                    if (unitScore <= maxVal && unitScore >= minVal)
+                    {
+                        unit.gameObject.SetActive(true);
+                    }
+                }
+            }
+        }
+    }
 }
 

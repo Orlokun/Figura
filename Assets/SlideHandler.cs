@@ -12,18 +12,30 @@ public class SlideHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     RectTransform maxSliderTransform;
     RectTransform rTransform;
 
+    SlideHandler minSlideHandler;
+    SlideHandler maxSlideHandler;
+
+
     public GameObject snippet;
     public GameObject snippetBox;
 
     float maxPosition;
     float minPosition;
 
+    DimensionsArchitect dArchitect;
+
 
     [SerializeField]
     bool isMaxSlider;
 
+    int showableNumber;
+
     private void Awake()
     {
+        //Must Check Initial Parameters
+        maxSlideHandler = maxSliderTransform.gameObject.GetComponent<SlideHandler>();
+        minSlideHandler = minSliderTransform.gameObject.GetComponent<SlideHandler>();
+
         if (isMaxSlider)
         {
             rTransform = maxSliderTransform;
@@ -37,6 +49,8 @@ public class SlideHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         maxPosition = maxSliderTransform.anchoredPosition.x;
         snippet.SetActive(false);
         snippetBox.SetActive(false);
+
+        dArchitect = FindObjectOfType<DimensionsArchitect>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -89,7 +103,7 @@ public class SlideHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         int maxParameter = 600;
         snippet.SetActive(true);
         snippetBox.SetActive(true);
-        int showableNumber = Mathf.RoundToInt(((incomingBarX * maxParameter) / maxPosition) + 250);
+        showableNumber = Mathf.RoundToInt(((incomingBarX * maxParameter) / maxPosition) + 250);
         Debug.Log("The showable number is this: " + showableNumber);
         Text sText = snippet.GetComponent<Text>();
         sText.text = showableNumber.ToString();
@@ -101,6 +115,12 @@ public class SlideHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         Debug.Log("OnEndDrag");
         snippet.SetActive(false);
         snippetBox.SetActive(false);
+        dArchitect.FilterDataRange(minSlideHandler.GetShowabeNumber(), maxSlideHandler.GetShowabeNumber());
+    }
+
+    public int GetShowabeNumber()
+    {
+        return showableNumber;
     }
 
 }

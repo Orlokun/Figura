@@ -2,22 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataUnit 
+public class DataUnit : MonoBehaviour
 {
     int numberOfDimension;
     int[] dimAchievements;
 
     int minScore;
     int maxScore;
-
-    public DataUnit(int nDimensions, int _minScore, int _maxScore)
-    {
-        numberOfDimension = nDimensions;
-        minScore = _minScore;
-        maxScore = _maxScore;
-        dimAchievements = new int [numberOfDimension];
-        GenerateRandomData();
-    }
 
     private void GenerateRandomData()
     {
@@ -37,4 +28,14 @@ public class DataUnit
     {
         return dimAchievements;
     }
+
+    public void ObjectReceiveData(int _nDimensions, int _minScore, int _maxScore)
+    {
+        numberOfDimension = _nDimensions;
+        minScore = _minScore;
+        maxScore = _maxScore;
+        dimAchievements = new int[numberOfDimension];
+        GenerateRandomData();
+    }
 }
+
