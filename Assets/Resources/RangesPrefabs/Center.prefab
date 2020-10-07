@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7118031430608664816}
   - component: {fileID: 7118031430608664818}
   - component: {fileID: 7118031430608664817}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,6 +141,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba42786ca15094744806aaebabe2bbbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRadius: 10
+  rData: {fileID: 0}
   segments: 50
-  rangesAmount: 5

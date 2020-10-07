@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2893592640817617373}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GuideLinesObject
   m_TagString: DimensionGuideLine
   m_Icon: {fileID: 0}

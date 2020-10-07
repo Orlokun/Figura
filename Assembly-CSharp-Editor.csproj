@@ -62,7 +62,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ValueRangeSlider\Scripts\Editor\Custom Drawers\MinMaxCustomSliderDrawer.cs" />
+    <Compile Include="Assets\AdvancedPeoplePack2\Scripts\Editor\CombinedCharacterEditor.cs" />
+    <Compile Include="Assets\AdvancedPeoplePack2\Scripts\Editor\EditorCharacterPrefabEdit.cs" />
+    <Compile Include="Assets\AdvancedPeoplePack2\Scripts\Editor\EditorHelpMenu.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.11f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -627,8 +629,17 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/GMR User/Documents/GitGames/figura/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>C:/Users/GMR User/Documents/GitGames/figura/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProGrids">
+      <HintPath>C:/Users/GMR User/Documents/GitGames/figura/Library/ScriptAssemblies/Unity.ProGrids.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>C:/Users/GMR User/Documents/GitGames/figura/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProGrids.Editor">
+      <HintPath>C:/Users/GMR User/Documents/GitGames/figura/Library/ScriptAssemblies/Unity.ProGrids.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/GMR User/Documents/GitGames/figura/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
@@ -645,17 +656,14 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>C:/Users/GMR User/Documents/GitGames/figura/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>C:/Users/GMR User/Documents/GitGames/figura/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/Users/GMR User/Documents/GitGames/figura/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>C:/Users/GMR User/Documents/GitGames/figura/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProGrids">
-      <HintPath>C:/Users/GMR User/Documents/GitGames/figura/Library/ScriptAssemblies/Unity.ProGrids.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProGrids.Editor">
-      <HintPath>C:/Users/GMR User/Documents/GitGames/figura/Library/ScriptAssemblies/Unity.ProGrids.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

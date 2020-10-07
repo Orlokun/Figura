@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class DataUnit : MonoBehaviour
 {
+    [SerializeField]
+    string userName;
+
+    [SerializeField]
+    string curso;
+
+
     int numberOfDimension;
     int[] unitScores;
 
@@ -18,7 +25,6 @@ public class DataUnit : MonoBehaviour
         }
     }
 
-
     int RandomNumber()
     {
         return Random.Range(minScore, maxScore);
@@ -29,12 +35,14 @@ public class DataUnit : MonoBehaviour
         return unitScores;
     }
 
-    public void ObjectReceiveData(int _nDimensions, int _minScore, int _maxScore)
+    public void SetDataUnitVariables(int _nDimensions, int _minScore, int _maxScore)
     {
         numberOfDimension = _nDimensions;
-        minScore = _minScore;
-        maxScore = _maxScore;
         unitScores = new int[numberOfDimension];
+
+        //Just for random Data
+        maxScore = _maxScore;
+        minScore = _minScore;
         GenerateRandomData();
     }
 }
