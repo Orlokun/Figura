@@ -21,9 +21,8 @@ namespace UnityCore
 
                 }
             }
-
-        }
 #endif
+        }
     }
 }
 
