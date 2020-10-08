@@ -831,3 +831,5 @@ C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Boo.Lang.Compiler.dll
 C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Boo.Lang.PatternMatching.dll
 C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Boo.Lang.Parser.dll
 C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Boo.Lang.Useful.dll
+C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Newtonsoft.Json.xml

@@ -9,8 +9,6 @@ using System.Linq.Expressions;
 using UnityEditor;
 
 #endif
-
-
 namespace BarGraph.VittorCloud
 {
 
@@ -42,10 +40,6 @@ namespace BarGraph.VittorCloud
         public Color barColor;
         public Material barMaterial;
         public List<XYBarValues> ListOfBars;
-
-       
-
-
     }
 
     [Serializable]
@@ -87,13 +81,13 @@ namespace BarGraph.VittorCloud
         public BarColor barColorProperty = BarColor.SolidColor;
         public float barScaleFactor = 1;
 
-       
+
         public BarGraphManager GraphRef;
 
         [HideInInspector]
-        public int yMaxValue;
+        public int yMaxValue = 850;
         [HideInInspector]
-        public int yMinValue;
+        public int yMinValue = 250;
 
         public Gradient HeightWiseGradient = new Gradient();
 
@@ -223,7 +217,7 @@ namespace BarGraph.VittorCloud
                 }
 
             }
-            ValidateRange();
+            //ValidateRange();
             Graph.FetchYPointValues(yMinValue, yMaxValue);
         }
 
@@ -237,7 +231,7 @@ namespace BarGraph.VittorCloud
             max = (int)MathExtension.GetMaxValue(yvalues);
 
             int range = max - min;
-            yMinValue = MathExtension.Round(min, range, minScore ,maxScore);
+            yMinValue = MathExtension.Round(min, range, minScore, maxScore);
             yMaxValue = MathExtension.Round(max, range, minScore, maxScore);
             //   Debug.Log("yMinValue" + yMinValue);
             //  Debug.Log("yMaxValue" + yMaxValue);
@@ -341,8 +335,6 @@ namespace BarGraph.VittorCloud
 
         public void CreateBarsWithAnimTypeTwo()
         {
-
-
             for (int i = 0; i < ListOfDataSet.Count; i++)
             {
                 for (int j = 0; j < ListOfDataSet[i].ListOfBars.Count; j++)
@@ -352,25 +344,15 @@ namespace BarGraph.VittorCloud
                         Graph.GenerateBarWithAnimTypeTwo(j, i, ListOfDataSet[i].ListOfBars[j].YValue, yscaleFactor, animationSpeed, yMinValue, xMaxSize, ListOfDataSet[i].barColor);
                     else if (barColorProperty == BarColor.HeightWiseGradient)
                     {
-
                         float time = (ListOfDataSet[i].ListOfBars[j].YValue - yMinValue) / (yMaxValue - yMinValue);
                         Color barcolor = HeightWiseGradient.Evaluate(time);
                         Graph.GenerateBarWithAnimTypeTwo(j, i, ListOfDataSet[i].ListOfBars[j].YValue, yscaleFactor, animationSpeed, yMinValue, xMaxSize, barcolor);
                     }
-
-
                     else
                         Graph.GenerateBarWithAnimTypeTwo(j, i, ListOfDataSet[i].ListOfBars[j].YValue, yscaleFactor, animationSpeed, yMinValue, xMaxSize, ListOfDataSet[i].barMaterial);
-
                 }
-
             }
-
-
             StartCoroutine(Graph.AnimateBarsWithAnimTypeTwo(animationSpeed));
-
-
-
         }
 
         #endregion
