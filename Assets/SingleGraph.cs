@@ -18,16 +18,12 @@ public class SingleGraph : MonoBehaviour
     private float yScore;
     private float yTopPosition;
 
-    private float maxYPosition = 10f;
+    private float maxYPosition = 5f;
     private float speed = 6;
 
     int waitTime = 100;
     int actualTime;
 
-    private void Start()
-    {
-
-    }
 
     private void Update()
     {
