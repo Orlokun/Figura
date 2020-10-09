@@ -543,7 +543,6 @@ C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Collections.Concurr
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Collections.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Collections.NonGeneric.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Collections.Specialized.dll
-C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.ComponentModel.Composition.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.ComponentModel.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.ComponentModel.EventBasedAsync.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.ComponentModel.Primitives.dll
@@ -560,16 +559,12 @@ C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Diagnostics.StackTr
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Diagnostics.TextWriterTraceListener.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Diagnostics.Tools.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Diagnostics.TraceSource.dll
-C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Diagnostics.Tracing.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.dll
-C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Drawing.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Drawing.Primitives.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Dynamic.Runtime.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Globalization.Calendars.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Globalization.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Globalization.Extensions.dll
-C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.IO.Compression.dll
-C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.IO.Compression.FileSystem.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.IO.Compression.ZipFile.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.IO.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.IO.FileSystem.dll
@@ -584,7 +579,6 @@ C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Linq.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Linq.Expressions.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Linq.Parallel.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Linq.Queryable.dll
-C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Net.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Net.Http.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Net.NameResolution.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Net.NetworkInformation.dll
@@ -626,7 +620,6 @@ C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Security.Cryptograp
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Security.Cryptography.X509Certificates.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Security.Principal.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Security.SecureString.dll
-C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.ServiceModel.Web.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Text.Encoding.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Text.Encoding.Extensions.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Text.RegularExpressions.dll
@@ -637,14 +630,10 @@ C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Threading.Tasks.Par
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Threading.Thread.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Threading.ThreadPool.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Threading.Timer.dll
-C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Transactions.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.ValueTuple.dll
-C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Web.dll
-C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Windows.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Xml.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Xml.Linq.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Xml.ReaderWriter.dll
-C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Xml.Serialization.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Xml.XDocument.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Xml.XmlDocument.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Xml.XmlSerializer.dll
@@ -833,3 +822,27 @@ C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Boo.Lang.Parser.dll
 C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Boo.Lang.Useful.dll
 C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Newtonsoft.Json.dll
 C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Boo.Lang.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Cinemachine.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\com.unity.cinemachine.editor.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Microsoft.CSharp.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.ComponentModel.Annotations.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Net.Http.Rtc.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Reflection.Emit.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Reflection.Emit.ILGeneration.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.Reflection.Emit.Lightweight.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.ServiceModel.Duplex.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.ServiceModel.Http.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.ServiceModel.NetTcp.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.ServiceModel.Primitives.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\System.ServiceModel.Security.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\UnityScript.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\UnityScript.Lang.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Boo.Lang.Compiler.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Boo.Lang.PatternMatching.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Boo.Lang.Parser.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Boo.Lang.Useful.dll
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Cinemachine.pdb
+C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\com.unity.cinemachine.editor.pdb
