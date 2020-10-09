@@ -21,6 +21,9 @@ public class SingleGraph : MonoBehaviour
     private float maxYPosition = 10f;
     private float speed = 6;
 
+    int waitTime = 100;
+    int actualTime;
+
     private void Start()
     {
 
@@ -28,17 +31,19 @@ public class SingleGraph : MonoBehaviour
 
     private void Update()
     {
-        if (transform.localScale.y < maxYPosition)
+        actualTime++;
+        if (actualTime>= waitTime)
         {
-            float upY = speed * Time.deltaTime;
-            transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y + upY, transform.localScale.z);
-            if(transform.localScale.y > maxYPosition)
+            if (transform.localScale.y < maxYPosition)
             {
-                transform.localScale = new Vector3(transform.localScale.x, maxYPosition, transform.localScale.z);
+                float upY = speed * Time.deltaTime;
+                transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y + upY, transform.localScale.z);
+                if(transform.localScale.y > maxYPosition)
+                {
+                    transform.localScale = new Vector3(transform.localScale.x, maxYPosition, transform.localScale.z);
+                }
+                transform.position = new Vector3(transform.position.x, transform.position.y + upY, transform.position.z);
             }
-            transform.position = new Vector3(transform.position.x, transform.position.y + upY, transform.position.z);
         }
     }
-
-
 }
