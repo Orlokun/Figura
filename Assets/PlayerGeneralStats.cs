@@ -10,20 +10,35 @@ public class PlayerGeneralStats : ScriptableObject
     [SerializeField]
     string mail;
 
-    [SerializeField]
-    [Range(250, 850,order = 1)]
-    int mPsu; 
+    private Dictionary<string, int> psuScores;
 
-    [SerializeField]
-    [Range(250, 850,order = 1)]
-    int lPsu;
+    public string[] psuTestNames;
 
-    [SerializeField]
-    [Range(250, 850,order = 1)]
-    int cPsu;
+    void Awake()
+    {
+        if (psuScores==null)
+        {
+            psuScores = new Dictionary<string, int>();
+        }
 
-    [SerializeField]
-    [Range(250, 850,order = 1)]
-    int hPsu;
-    
+        if (psuTestNames == null)
+        {
+            psuTestNames = new string[4] { "Mat", "Leng", "Hist", "Cienc" };
+        }
+
+        if (psuScores.Count <= 0)
+        {
+            GenerateRandomPSUData();
+        }
+    }
+
+    private void GenerateRandomPSUData()
+    {
+        for (int i = 0; i<psuTestNames.Length; i++)
+        {
+            int rScore = Random.Range(250, 850);
+            psuScores.Add(psuTestNames[i], rScore);
+            Debug.Log("I added the random score of: " + rScore);
+        }
+    }
 }

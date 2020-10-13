@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ChartArchitect : MonoBehaviour
 {
+    public Cinemachine.CinemachineVirtualCamera vCamera;
 
     float maxXsize = 10f;
     float maxYsize = 10f;
@@ -19,7 +20,11 @@ public class ChartArchitect : MonoBehaviour
     [SerializeField]
     private int yMinScore;
 
-
+    //Color Handler
+    [SerializeField]
+    Gradient gradient;
+    GradientColorKey[] colorKey;
+    GradientAlphaKey[] alphaKey;
 
     float[] xPositions;
     float[] zPositions;
@@ -32,17 +37,22 @@ public class ChartArchitect : MonoBehaviour
     public List<Vector3>[] xAxisColumns;
     public List<Vector3>[] zAxisColumns;
 
-
-
-
     // Start is called before the first frame update
     void Start()
     {
         GenerateLists();
         CalculateChartXZPositions();              //Done. Data saved in floats. 
         InstantiateWithPositionValues();
+        InstantiateTargetCameraObject();
         CalculateChartGeneralDimensions();
         //JustDoit();
+    }
+
+    void InstantiateTargetCameraObject()
+    {
+        GameObject centralObject = (GameObject)Instantiate(Resources.Load("CentralObj"), new Vector3(maxXsize / 2, maxYsize / 2, maxZsize / 2), transform.rotation, transform);
+        vCamera.m_LookAt = centralObject.transform;
+        vCamera.m_Follow = centralObject.transform;
     }
 
     void GenerateLists()
@@ -52,13 +62,13 @@ public class ChartArchitect : MonoBehaviour
         {
             xAxisColumns[i] = new List<Vector3>();
         }
-
         zAxisColumns = new List<Vector3>[zValues];
         for (int i = 0; i < zAxisColumns.Length; i++)
         {
             zAxisColumns[i] = new List<Vector3>();
         }
     }
+
     void CalculateChartXZPositions()
     {
         int xVirtualPositions = xValues * 2;
@@ -73,9 +83,9 @@ public class ChartArchitect : MonoBehaviour
         int xPositionToBeAdded = 0;
         int zPositionToBeAdded = 0;
 
-        for (int i = 0; i< xVirtualPositions;i++)
+        for (int i = 0; i < xVirtualPositions; i++)
         {
-            if(i%2 != 0)
+            if (i % 2 != 0)
             {
                 xPositions[xPositionToBeAdded] = xAxisDistRange * i;
                 Debug.Log("xPosition added was: " + xPositions[xPositionToBeAdded]);
@@ -98,11 +108,14 @@ public class ChartArchitect : MonoBehaviour
 
     void InstantiateWithPositionValues()
     {
-        for (int xPos = 0; xPos<xPositions.Length; xPos++)
+        for (int xPos = 0; xPos < xPositions.Length; xPos++)
         {
             for (int zPos = 0; zPos < zPositions.Length; zPos++)
             {
-                GameObject chObject = (GameObject)Instantiate(Resources.Load("TestCylinder"), new Vector3(xPositions[xPos], transform.localPosition.y, zPositions[zPos]), transform.rotation, transform);
+                GameObject chObject = (GameObject)Instantiate(Resources.Load("TestCylinder"), transform, false);
+                chObject.transform.localPosition = new Vector3(xPositions[xPos], transform.localPosition.y, zPositions[zPos]);
+                chObject.transform.rotation = transform.rotation;
+
                 xAxisColumns[xPos].Add(new Vector3(xPositions[xPos], transform.localPosition.y, zPositions[zPos]));
                 chObject.transform.localScale = new Vector3(GetChartDiameter(), chObject.transform.localScale.y, GetChartDiameter());
             }
@@ -119,11 +132,9 @@ public class ChartArchitect : MonoBehaviour
 
     void CalculateChartGeneralDimensions()
     {
-
         float cylRadius = GetChartDiameter();
         float xOffSet = CalculateOffset(xValues);
         float zOffSet = CalculateOffset(zValues);
-
     }
 
     private float GetChartDiameter()
@@ -134,7 +145,7 @@ public class ChartArchitect : MonoBehaviour
         }
         else
         {
-            return CalculateChartDiameter(zValues);
+            return CalculateChartDiameter(xValues);
         }
     }
 
