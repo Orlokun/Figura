@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SingleGraphMovState
+{
+    increasing,
+    decreasing,
+    paused,
+}
 
 public class SingleGraph : MonoBehaviour
 {
     //Chart myChart = FindObjectOfType<Chart>();
 
-    private Vector3 initialPosition;
-    private int zGridPosition;
-    private int xGridPosition;
-    
+    private SingleGraphMovState movState;
 
-    private Vector3 myGridPosition;
     private Color myColor;
 
     private float yScore;
@@ -25,8 +27,25 @@ public class SingleGraph : MonoBehaviour
     int actualTime;
 
 
+    private void Awake()
+    {
+        
+    }
+
     private void Update()
     {
+        switch (movState)
+        {
+            case SingleGraphMovState.decreasing:
+                break;
+            case SingleGraphMovState.increasing:
+                break;
+            case SingleGraphMovState.paused:
+                break;
+            default:
+                break;
+        }
+
         actualTime++;
         if (actualTime>= waitTime)
         {

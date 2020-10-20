@@ -3,42 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerStats", menuName = "PlayerData")]
-public class PlayerGeneralStats : ScriptableObject
+public class PlayerProfileData : ScriptableObject
 {
+    //General Data
     [SerializeField]
     string name;
     [SerializeField]
     string mail;
+    [SerializeField]
+    int age;
+    [SerializeField]
+    string[] skills;
 
-    private Dictionary<string, int> psuScores;
+    //ProjectData
+    public PsuData psuPData;
 
-    public string[] psuTestNames;
 
     void Awake()
     {
-        if (psuScores==null)
-        {
-            psuScores = new Dictionary<string, int>();
-        }
+        //GetPsuDataFromJsonToo
+        psuPData = (PsuData)PsuData.CreateInstance(typeof(PsuData));
 
-        if (psuTestNames == null)
-        {
-            psuTestNames = new string[4] { "Mat", "Leng", "Hist", "Cienc" };
-        }
-
-        if (psuScores.Count <= 0)
-        {
-            GenerateRandomPSUData();
-        }
     }
+    #region Getters&Setters
 
-    private void GenerateRandomPSUData()
-    {
-        for (int i = 0; i<psuTestNames.Length; i++)
-        {
-            int rScore = Random.Range(250, 850);
-            psuScores.Add(psuTestNames[i], rScore);
-            Debug.Log("I added the random score of: " + rScore);
-        }
-    }
+    
+
+
+    #endregion
+    #region JustForTesting
+
+    
+
+
+
+    #endregion  
 }

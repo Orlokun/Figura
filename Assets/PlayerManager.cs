@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+[CreateAssetMenu(fileName = "PlayerManager", menuName ="PlayerManager")]
+public class PlayerManager : ScriptableObject
 {
     [SerializeField]
-    PlayerGeneralStats gStats;
+    public PlayerProfileData pStats;
 
-    private void Awake()
+
+    public void GetPlayerDataFromFiles()
     {
-        //Instance from Json
-        gStats = (PlayerGeneralStats)PlayerGeneralStats.CreateInstance(typeof(PlayerGeneralStats));
+        //Get Json depending on user
+        pStats = (PlayerProfileData)PlayerProfileData.CreateInstance(typeof(PlayerProfileData));
+    }
 
+    public PlayerProfileData GetPlayerData()
+    {
+        return pStats;
     }
 }

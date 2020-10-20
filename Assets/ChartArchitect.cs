@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum DataSet
+public enum DataSetType
 {
     psu,
-
 }
-
 
 
 public class ChartArchitect : MonoBehaviour
@@ -27,7 +25,7 @@ public class ChartArchitect : MonoBehaviour
     string[] xAxisLabel;
     [SerializeField]
     string[] zAxisLabel;
-    
+
     [SerializeField]
     private int yMaxScore;
     [SerializeField]
@@ -47,41 +45,73 @@ public class ChartArchitect : MonoBehaviour
     public string[] xTags;
     public string[] zTags;
 
-    public List<Vector3>[] xAxisColumns;
-    public List<Vector3>[] zAxisColumns;
+    public List<SingleGraph>[] xAxisGraphs;
+    public List<SingleGraph>[] zAxisGraphs;
+
+    PlayerProfileData pStats;
+
+    public DataSetType dType;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-
         GenerateLists();
+        //JustDoit();
+    }
+
+    public void InitializeData(PlayerProfileData pProfile, DataSetType _dType)
+    {
+        SetBasicVariables(pProfile, _dType);
         CalculateChartXZPositions();              //Done. Data saved in floats. 
         InstantiateWithPositionValues();
         InstantiateTargetCameraObject();
         CalculateChartGeneralDimensions();
-        //JustDoit();
+    }
+
+
+    private void GetPlayerData()
+    {
+
+    }
+
+    private void SetBasicVariables(PlayerProfileData _pProfile, DataSetType _dType)
+    {
+        switch (_dType)
+        {
+            case DataSetType.psu:
+                DesignPSUColumnsRows(_pProfile);
+                break;
+            default:
+                break;
+        }
+    }
+
+    void DesignPSUColumnsRows(PlayerProfileData _pProfile)
+    {
+        zValues = 4;
+        xValues = _pProfile.psuPData.GetGeneralResultsCount();
     }
 
     void InstantiateTargetCameraObject()
     {
-        GameObject centralObject = (GameObject)Instantiate(Resources.Load("CentralObj"),transform, false);
+        GameObject centralObject = (GameObject)Instantiate(Resources.Load("CentralObj"), transform, false);
         centralObject.transform.localPosition = new Vector3(maxXsize / 2, maxYsize / 2, maxZsize / 2);
 
         vCamera.m_LookAt = centralObject.transform;
         vCamera.m_Follow = centralObject.transform;
     }
 
-    void GenerateLists()
+    void GenerateLists()    //this list won't be Vectors
     {
-        xAxisColumns = new List<Vector3>[xValues];
-        for (int i = 0; i < xAxisColumns.Length; i++)
+        xAxisGraphs = new List<SingleGraph>[xValues];
+        for (int i = 0; i < xAxisGraphs.Length; i++)
         {
-            xAxisColumns[i] = new List<Vector3>();
+            xAxisGraphs[i] = new List<SingleGraph>();
         }
-        zAxisColumns = new List<Vector3>[zValues];
-        for (int i = 0; i < zAxisColumns.Length; i++)
+        zAxisGraphs = new List<SingleGraph>[zValues];
+        for (int i = 0; i < zAxisGraphs.Length; i++)
         {
-            zAxisColumns[i] = new List<Vector3>();
+            zAxisGraphs[i] = new List<SingleGraph>();
         }
     }
 
@@ -104,19 +134,17 @@ public class ChartArchitect : MonoBehaviour
             if (i % 2 != 0)
             {
                 xPositions[xPositionToBeAdded] = xAxisDistRange * i;
-                Debug.Log("xPosition added was: " + xPositions[xPositionToBeAdded]);
+                //Debug.Log("xPosition added was: " + xPositions[xPositionToBeAdded]);
                 xPositionToBeAdded++;
             }
         }
-
-        Debug.Log("/////////////////////////////////////");
 
         for (int i = 0; i < zVirtualPositions; i++)
         {
             if (i % 2 != 0)
             {
                 zPositions[zPositionToBeAdded] = zAxisDistRange * i;
-                Debug.Log("zPosition added was: " + zPositions[zPositionToBeAdded]);
+                //Debug.Log("zPosition added was: " + zPositions[zPositionToBeAdded]);
                 zPositionToBeAdded++;
             }
         }
@@ -133,24 +161,22 @@ public class ChartArchitect : MonoBehaviour
         {
             for (int zPos = 0; zPos < zPositions.Length; zPos++)
             {
+                //Set GameObject
                 GameObject chObject = (GameObject)Instantiate(Resources.Load("TestCylinder"), hObject.transform, false);
                 chObject.transform.localPosition = new Vector3(xPositions[xPos], 0.01f, zPositions[zPos]);
                 chObject.transform.rotation = hObject.transform.rotation;
-
-                //Adding columns and rows by position **Must be deprecated
-                xAxisColumns[xPos].Add(new Vector3(xPositions[xPos], 0.01f, zPositions[zPos]));
                 chObject.transform.localScale = new Vector3(GetChartDiameter(), chObject.transform.localScale.y, GetChartDiameter());
+
+                //SetScript
+                SingleGraph sGraph = chObject.GetComponent<SingleGraph>();
+
+                //Save Graph Unit in List
+
             }
         }
 
         //Adding columns and rows by position **Must be deprecated
-        for (int zPos = 0; zPos < zPositions.Length; zPos++)
-        {
-            for (int xPos = 0; xPos < xPositions.Length; xPos++)
-            {
-                zAxisColumns[zPos].Add(new Vector3(xPositions[xPos], transform.localPosition.y, zPositions[zPos]));
-            }
-        }
+
     }
 
     void CalculateChartGeneralDimensions()
