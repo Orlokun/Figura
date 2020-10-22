@@ -77,7 +77,7 @@ public class PsuData : ScriptableObject
         {
             int rScore = Random.Range(250, maxScore);
             testResults.Add(psuTestNames[i], rScore);
-            Debug.Log("I added the random score of: " + rScore + "a la tanda número: " + tanda + "de ensayos");
+            //Debug.Log("I added the random score of: " + rScore + "a la tanda número: " + tanda + "de ensayos");
         }
 
         EssayResult eResult = new EssayResult(testResults);

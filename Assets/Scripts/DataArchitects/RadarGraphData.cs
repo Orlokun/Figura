@@ -22,8 +22,6 @@ public class RadarGraphData : ScriptableObject
 
     public int numberOfRanges;
 
-
-
     #region Public Getters & Setters
     //MinScore
     public int GetMinScore()
@@ -33,7 +31,7 @@ public class RadarGraphData : ScriptableObject
 
     public void SetMinScore(int _minScore)
     {
-        maxScore = _minScore;
+        minScore = _minScore;
     }
     //Max Score
     public int GetMaxScore()

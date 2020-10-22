@@ -26,6 +26,9 @@ public class SingleGraph : MonoBehaviour
     private ChartArchitect chArchitect;
     private Color myColor;
 
+    [SerializeField]
+    private GameObject lObject;
+
     private float maxYPosition = 5f;
     private float speed = 6;
 
@@ -40,6 +43,7 @@ public class SingleGraph : MonoBehaviour
 
     private void Update()
     {
+        lObject.transform.position = new Vector3(transform.position.x, (transform.position.y * 2f) + (lObject.transform.localScale.y), transform.position.z);
         switch (movState)
         {
             case SingleGraphMovState.decreasing:
@@ -73,10 +77,10 @@ public class SingleGraph : MonoBehaviour
         if(cSize == transform.localScale.y)
         {
             idleTime++;
-            if (idleTime == 100)
+            if (idleTime == 10)
             {
                 idleTime = 0;
-                movState = SingleGraphMovState.decreasing;
+                movState = SingleGraphMovState.paused;
             }
         }
         UpdateColor();
@@ -104,10 +108,10 @@ public class SingleGraph : MonoBehaviour
         if (cSize == transform.localScale.y)
         {
             idleTime++;
-            if (idleTime == 100)
+            if (idleTime == 10)
             {
                 idleTime = 0;
-                movState = SingleGraphMovState.increasing;
+                movState = SingleGraphMovState.paused;
             }
         }
         UpdateColor();

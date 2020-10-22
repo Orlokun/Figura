@@ -162,13 +162,14 @@ public class ChartArchitect : MonoBehaviour
             for (int zPos = 0; zPos < zPositions.Length; zPos++)
             {
                 //Create GameObject
-                GameObject chObject = (GameObject)Instantiate(Resources.Load("TestCylinder"), hObject.transform, false);
+                GameObject chObject = (GameObject)Instantiate(Resources.Load("Prefab_BarObject"), hObject.transform, false);
                 chObject.transform.localPosition = new Vector3(xPositions[xPos], 0.01f, zPositions[zPos]);
                 chObject.transform.rotation = hObject.transform.rotation;
                 chObject.transform.localScale = new Vector3(GetChartDiameter(), chObject.transform.localScale.y, GetChartDiameter());
 
                 //Set Script Data
-                SingleGraph sGraph = chObject.GetComponent<SingleGraph>();
+                SingleGraph sGraph = GetGraphFromchild(chObject);
+
                 sGraph.testName = playerData.psuPData.GetPSUTestName(zPos);
                 sGraph.testNumber = xPos;
                 sGraph.maxScore = playerData.psuPData.GetMaxScore();
@@ -191,6 +192,19 @@ public class ChartArchitect : MonoBehaviour
 
         //Adding columns and rows by position **Must be deprecated
 
+    }
+
+    private SingleGraph GetGraphFromchild(GameObject chObject)
+    {
+        for (int i = 0; i < chObject.transform.childCount; i++)
+        {
+            if (chObject.transform.GetChild(i).GetComponent<SingleGraph>())
+            {
+                return chObject.transform.GetChild(i).GetComponent<SingleGraph>();
+            }
+        }
+        Debug.LogError("None of the childs Object had a 'Single graph' script. Game object name: " + chObject.name);
+        return null;
     }
 
     void CalculateChartGeneralDimensions()

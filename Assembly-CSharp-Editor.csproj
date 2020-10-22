@@ -65,9 +65,6 @@
     <Compile Include="Assets\AdvancedPeoplePack2\Scripts\Editor\CombinedCharacterEditor.cs" />
     <Compile Include="Assets\AdvancedPeoplePack2\Scripts\Editor\EditorCharacterPrefabEdit.cs" />
     <Compile Include="Assets\AdvancedPeoplePack2\Scripts\Editor\EditorHelpMenu.cs" />
-    <Compile Include="Assets\VC\3D Interactive Bar Chart\2.Scripts\Editor\BarGraphGenerator_Editor.cs" />
-    <Compile Include="Assets\VC\3D Interactive Bar Chart\2.Scripts\Editor\CreateBarGraph.cs" />
-    <Compile Include="Assets\VC\3D Interactive Bar Chart\2.Scripts\Editor\Shortcut.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.11f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
