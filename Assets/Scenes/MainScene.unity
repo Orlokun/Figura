@@ -7471,8 +7471,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5830255968187974297, guid: f84399f06bd93114f9e76b81964fcc3d,
         type: 3}
+      propertyPath: vCameras.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5830255968187974297, guid: f84399f06bd93114f9e76b81964fcc3d,
+        type: 3}
       propertyPath: vCamera
       value: 
       objectReference: {fileID: 1963788672}
+    - target: {fileID: 5830255968187974297, guid: f84399f06bd93114f9e76b81964fcc3d,
+        type: 3}
+      propertyPath: vCameras.Array.data[0]
+      value: 
+      objectReference: {fileID: 1963788672}
+    - target: {fileID: 5830255968187974297, guid: f84399f06bd93114f9e76b81964fcc3d,
+        type: 3}
+      propertyPath: vCameras.Array.data[1]
+      value: 
+      objectReference: {fileID: 1906535200}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f84399f06bd93114f9e76b81964fcc3d, type: 3}

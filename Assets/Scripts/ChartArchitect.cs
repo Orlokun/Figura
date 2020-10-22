@@ -10,7 +10,7 @@ public enum DataSetType
 
 public class ChartArchitect : MonoBehaviour
 {
-    public Cinemachine.CinemachineVirtualCamera vCamera;
+    public Cinemachine.CinemachineVirtualCamera[] vCameras;
     public PlayerProfileData playerData;
 
 
@@ -69,39 +69,19 @@ public class ChartArchitect : MonoBehaviour
         CalculateChartGeneralDimensions();
     }
 
-    private void GetPlayerData()
-    {
-
-    }
-
-    private void SetBasicVariables(PlayerProfileData _pProfile, DataSetType _dType)
+    void SetBasicVariables(PlayerProfileData _pProfile, DataSetType _dType)
     {
         switch (_dType)
         {
             case DataSetType.psu:
-                DesignPSUColumnsRows(_pProfile);
+                GetDesignPSUValues(_pProfile);
                 break;
             default:
                 break;
         }
     }
 
-    void DesignPSUColumnsRows(PlayerProfileData _pProfile)
-    {
-        zValues = 4;
-        xValues = _pProfile.psuPData.GetGeneralResultsCount();
-    }
-
-    void InstantiateTargetCameraObject()
-    {
-        GameObject centralObject = (GameObject)Instantiate(Resources.Load("CentralObj"), transform, false);
-        centralObject.transform.localPosition = new Vector3(maxXsize / 2, maxYsize / 2, maxZsize / 2);
-
-        vCamera.m_LookAt = centralObject.transform;
-        vCamera.m_Follow = centralObject.transform;
-    }
-
-    void GenerateLists()    //this list won't be Vectors
+    void GenerateLists()
     {
         xAxisGraphs = new List<SingleGraph>[xValues];
         for (int i = 0; i < xAxisGraphs.Length; i++)
@@ -183,7 +163,7 @@ public class ChartArchitect : MonoBehaviour
                         Debug.Log("Success!!!!! in Test named: " + sGraph.testName + " with score: " + sGraph.actualScore);
                     }
                 }
-                
+                sGraph.UpdateLabelWithScore();
                 //Save Graph Unit in List
                 xAxisGraphs[xPos].Add(sGraph);
                 zAxisGraphs[zPos].Add(sGraph);
@@ -193,6 +173,27 @@ public class ChartArchitect : MonoBehaviour
         //Adding columns and rows by position **Must be deprecated
 
     }
+
+    void GetDesignPSUValues(PlayerProfileData _pProfile)
+    {
+        zValues = 4;
+        xValues = _pProfile.psuPData.GetGeneralResultsCount();
+    }
+
+    void InstantiateTargetCameraObject()
+    {
+        GameObject centralObject = (GameObject)Instantiate(Resources.Load("CentralObj"), transform, false);
+        centralObject.transform.localPosition = new Vector3(maxXsize / 2, maxYsize / 2, maxZsize / 2);
+
+        foreach(Cinemachine.CinemachineVirtualCamera vCamera in vCameras)
+        {
+            vCamera.m_LookAt = centralObject.transform;
+            vCamera.m_Follow = centralObject.transform;
+        }
+    }
+
+
+
 
     private SingleGraph GetGraphFromchild(GameObject chObject)
     {

@@ -127,4 +127,10 @@ public class SingleGraph : MonoBehaviour
     {
         movState = _gState;
     }
+
+    public void UpdateLabelWithScore()
+    {
+        TextMesh tMesh = lObject.transform.GetComponentInChildren<TextMesh>();
+        tMesh.text = actualScore.ToString();
+    }
 }
