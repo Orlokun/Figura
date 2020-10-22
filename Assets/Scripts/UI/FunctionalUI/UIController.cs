@@ -5,29 +5,36 @@ using UnityEngine;
 
 public enum UIGeneralState
 {
-    GenearalProfile,
-    Statistics,
-    SearchProject,
+    Profile,
     ActiveProjects,
-    Account
+    SearchProject,
+    RecommendedProjects,
+    Community,
+    Account,
 }
 
 public class UIController : MonoBehaviour
 {
+
+
+    #region GlobalVariables
+    
     [SerializeField]
-    GameObject[] profileCanvases;
+    GameObject[] uiObjects;
 
     private Dictionary<string, GameObject> uiPanels;
 
     private UIGeneralState actualState;
 
+    //Many of these things shouldn't be here
     public PlayerManager pManager;
 
     private ChartArchitect chArchitect;
 
     private DataUnitsManager dUManager;
+    #endregion
 
-    // Start is called before the first frame update
+    #region Awake Functions
     void Awake()
     {
         dUManager = FindObjectOfType<DataUnitsManager>();
@@ -40,12 +47,11 @@ public class UIController : MonoBehaviour
         //Move away from here
         StartChart();
     }
-    
 
     private void SetInitialUI()
     {
         SetPanelsNameDictionary();
-        actualState = UIGeneralState.GenearalProfile;
+        actualState = UIGeneralState.Profile;
         UpdateUIState();
     }
 
@@ -53,40 +59,42 @@ public class UIController : MonoBehaviour
     {
         switch (actualState)
         {
-            case UIGeneralState.GenearalProfile:
-                SetObjectActiveFromString("GeneralProfile");
+            case UIGeneralState.Profile:
+                SetObjectActiveFromString("Perfil");
                 break;
-            case UIGeneralState.Statistics:
-                SetObjectActiveFromString("PSUCanvas");
+            case UIGeneralState.ActiveProjects:
+                SetObjectActiveFromString("ProyectosActivos");
+                break;
+            case UIGeneralState.SearchProject:
+                SetObjectActiveFromString("NuevoProyecto");
+                break;
+            case UIGeneralState.RecommendedProjects:
+                SetObjectActiveFromString("ProyectosRecomendados");
+                break;
+            case UIGeneralState.Community:
+                SetObjectActiveFromString("Comunidad");
+                break;
+            case UIGeneralState.Account:
+                SetObjectActiveFromString("Cuenta");
                 break;
             default:
                 break;
         }
     }
 
-    public void NextUIMenu(bool next)
+    private void SetPanelsNameDictionary()
     {
-        int actualStateInt = (int)actualState;
-        if (next)
+        uiPanels = new Dictionary<string, GameObject>();
+        for (int i = 0; i < uiObjects.Length; i++)
         {
-            actualStateInt++;
-            if (actualStateInt >1)
-            {
-                actualStateInt = 0;
-            }
+            string objectName = uiObjects[i].name;
+            uiPanels.Add(objectName, uiObjects[i]);
         }
-        else
-        {
-            actualStateInt--;
-            if (actualStateInt<0)
-            {
-                actualStateInt = 1;     //Hardcoded number. Must be deprecated
-            }
-        }
-        actualState = (UIGeneralState)actualStateInt;
-        UpdateUIState();
     }
 
+    #endregion
+
+    #region Utilities
 
     private void SetObjectActiveFromString(string _key)
     {
@@ -103,19 +111,16 @@ public class UIController : MonoBehaviour
         }
     }
 
-    private void SetPanelsNameDictionary()
+    public void TurnObjectOn(GameObject _gObject)
     {
-        uiPanels = new Dictionary<string, GameObject>();
-        for (int i = 0; i<profileCanvases.Length; i++)
-        {
-            string objectName = profileCanvases[i].name;
-            uiPanels.Add(objectName, profileCanvases[i]);
-        }
+        string kName = _gObject.name;
+        SetObjectActiveFromString(kName);
     }
 
-    void TurnObjectOn(GameObject _gObject)
+    public void SetState(int _state)
     {
-
+        actualState = (UIGeneralState)_state;
+        UpdateUIState();
     }
 
     public void StartChart()
@@ -123,13 +128,16 @@ public class UIController : MonoBehaviour
         chArchitect.InitializeData(pManager.pStats, DataSetType.psu);
     }
 
-
     private void StartPlayerManager()
     {
         pManager.GetPlayerDataFromFiles();
+        chArchitect.playerData = pManager.pStats;
     }
+
     public void AddNewUnitForVisualization()
     {
         dUManager.AddSatisticsUnit();
     }
+
+    #endregion
 }

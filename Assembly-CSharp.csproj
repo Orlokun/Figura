@@ -102,6 +102,7 @@
     <Compile Include="Assets\Scripts\UI\CameraController.cs" />
     <Compile Include="Assets\Scripts\UI\FunctionalUI\SlideHandler.cs" />
     <Compile Include="Assets\Scripts\UI\FunctionalUI\UIController.cs" />
+    <Compile Include="Assets\Scripts\UI\FunctionalUI\UIProfileComponent.cs" />
     <Compile Include="Assets\Scripts\UI\NotUsed\ActiveStateToggler.cs" />
     <Compile Include="Assets\Scripts\UI\NotUsed\ApplicationManager.cs" />
     <Compile Include="Assets\Scripts\UI\NotUsed\DragMe.cs" />

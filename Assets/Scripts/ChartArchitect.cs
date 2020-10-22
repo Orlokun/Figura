@@ -11,6 +11,8 @@ public enum DataSetType
 public class ChartArchitect : MonoBehaviour
 {
     public Cinemachine.CinemachineVirtualCamera vCamera;
+    public PlayerProfileData playerData;
+
 
     float maxXsize = 10f;
     float maxYsize = 10f;
@@ -32,8 +34,7 @@ public class ChartArchitect : MonoBehaviour
     private int yMinScore;
 
     //Color Handler
-    [SerializeField]
-    Gradient gradient;
+    public Gradient gradient;
     GradientColorKey[] colorKey;
     GradientAlphaKey[] alphaKey;
 
@@ -67,7 +68,6 @@ public class ChartArchitect : MonoBehaviour
         InstantiateTargetCameraObject();
         CalculateChartGeneralDimensions();
     }
-
 
     private void GetPlayerData()
     {
@@ -161,16 +161,28 @@ public class ChartArchitect : MonoBehaviour
         {
             for (int zPos = 0; zPos < zPositions.Length; zPos++)
             {
-                //Set GameObject
+                //Create GameObject
                 GameObject chObject = (GameObject)Instantiate(Resources.Load("TestCylinder"), hObject.transform, false);
                 chObject.transform.localPosition = new Vector3(xPositions[xPos], 0.01f, zPositions[zPos]);
                 chObject.transform.rotation = hObject.transform.rotation;
                 chObject.transform.localScale = new Vector3(GetChartDiameter(), chObject.transform.localScale.y, GetChartDiameter());
 
-                //SetScript
+                //Set Script Data
                 SingleGraph sGraph = chObject.GetComponent<SingleGraph>();
-                //setgraphData
-
+                sGraph.testName = playerData.psuPData.GetPSUTestName(zPos);
+                sGraph.testNumber = xPos;
+                sGraph.maxScore = playerData.psuPData.GetMaxScore();
+                foreach (KeyValuePair<int, EssayResult> kPair in playerData.psuPData.GetGeneralResults())
+                {
+                    if (kPair.Key == xPos)
+                    {
+                        EssayResult eResult = kPair.Value;
+                        sGraph.actualScore = eResult.GetEssayResult(sGraph.testName);
+                        sGraph.SetGraphState(SingleGraphMovState.increasing);
+                        Debug.Log("Success!!!!! in Test named: " + sGraph.testName + " with score: " + sGraph.actualScore);
+                    }
+                }
+                
                 //Save Graph Unit in List
                 xAxisGraphs[xPos].Add(sGraph);
                 zAxisGraphs[zPos].Add(sGraph);
