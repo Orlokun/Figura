@@ -4,10 +4,30 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+public enum SliderMovType
+{
+    Horizontal,
+    Vertical,
+}
+
+public enum SliderDataType
+{
+    Chart3D,
+    RadarGraph,
+}
+
 public class SlideHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    //the type of slider
+    [SerializeField]
+    SliderMovType sType;
+
+    [SerializeField]
+    SliderDataType sDType;
+
     //Basic Data From Radar Scriptable
     public RadarGraphData rData;
+    public PsuData psuData;
 
     //Both of the slider handlers Transforms
     [SerializeField]
@@ -27,7 +47,7 @@ public class SlideHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     public GameObject snippetBox;
 
     //Max positions based on rect transform position
-    float maxPosition;  
+    float maxPosition;
     float minPosition;
 
     DataUnitsManager dUManager;
@@ -40,10 +60,51 @@ public class SlideHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
     private void Awake()
     {
-        //Must Check Initial Parameters
+        //Todo Must Check Initial Parameters
+        SetInitialData();
+    }
+
+    void SetInitialData()
+    {
+        SetTransformsData();
+        CheckSliderRole();
+        snippet.SetActive(false);
+        snippetBox.SetActive(false);
+
+        switch (sDType)
+        {
+            case SliderDataType.Chart3D:
+                break;
+            case SliderDataType.RadarGraph:
+                dUManager = FindObjectOfType<DataUnitsManager>();
+                break;
+            default:
+                return;
+        }
+        showableNumber = CalculateShowableNumber();
+    }
+
+    private void SetTransformsData()
+    {
         maxSlideHandler = maxSliderTransform.gameObject.GetComponent<SlideHandler>();
         minSlideHandler = minSliderTransform.gameObject.GetComponent<SlideHandler>();
+        switch (sType)
+        {
+            case SliderMovType.Horizontal:
+                minPosition = minSliderTransform.anchoredPosition.x;
+                maxPosition = maxSliderTransform.anchoredPosition.x;
+                break;
+            case SliderMovType.Vertical:
+                minPosition = minSliderTransform.anchoredPosition.y;
+                maxPosition = maxSliderTransform.anchoredPosition.y;
+                break;
+            default:
+                return;
+        }
+    }
 
+    private void CheckSliderRole()
+    {
         if (isMaxSlider)
         {
             rTransform = maxSliderTransform;
@@ -52,14 +113,6 @@ public class SlideHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         {
             rTransform = minSliderTransform;
         }
-
-        minPosition = minSliderTransform.anchoredPosition.x;
-        maxPosition = maxSliderTransform.anchoredPosition.x;
-        snippet.SetActive(false);
-        snippetBox.SetActive(false);
-        showableNumber =  CalculateShowableNumber();
-
-        dUManager = FindObjectOfType<DataUnitsManager>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -76,9 +129,64 @@ public class SlideHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
     public void OnDrag(PointerEventData eventData)
     {
-        Vector2 eventDeltaSinY = new Vector2(eventData.delta.x, rTransform.anchoredPosition.y);
+
+        switch (sType)
+        {
+            case SliderMovType.Horizontal:
+                HandleUIHorizontalSlide(eventData);
+
+                break;
+            case SliderMovType.Vertical:
+                HandleUIVerticalSlide(eventData);
+                break;
+            default:
+                return;
+        }
+    }
+
+    #region MovementHandlers
+    private void HandleUIVerticalSlide(PointerEventData _eData)                    //This code is bassilcally repeated. Can be optimized and made flexible
+    {
+        Vector2 eDeltaSinX = new Vector2(rTransform.anchoredPosition.x, _eData.delta.y);
+        float anchPosY = rTransform.anchoredPosition.y;
+        float newYPosi = anchPosY += _eData.delta.y;
+
+        if (newYPosi < minPosition || newYPosi > maxPosition)
+        {
+            return;
+        }
+
+        else if (isMaxSlider && newYPosi < minSliderTransform.anchoredPosition.y)
+        {
+            minSliderTransform.anchoredPosition += eDeltaSinX;
+            minSlideHandler.CalculateShowableNumber();
+            rTransform.anchoredPosition += eDeltaSinX;
+            showableNumber = CalculateShowableNumber(newYPosi);
+            DisplaySnipetNumber();
+        }
+        else if (!isMaxSlider && newYPosi > maxSliderTransform.anchoredPosition.y)
+        {
+            maxSliderTransform.anchoredPosition += eDeltaSinX;
+            maxSlideHandler.CalculateShowableNumber();
+            rTransform.anchoredPosition += eDeltaSinX;
+            showableNumber = CalculateShowableNumber(newYPosi);
+            DisplaySnipetNumber();
+        }
+        else
+        {
+            rTransform.anchoredPosition += eDeltaSinX;
+            anchPosY = rTransform.anchoredPosition.y;
+            showableNumber = CalculateShowableNumber(newYPosi);
+            DisplaySnipetNumber();
+        }
+
+    }
+
+    private void HandleUIHorizontalSlide(PointerEventData _eData)
+    {
+        Vector2 eventDeltaSinY = new Vector2(_eData.delta.x, rTransform.anchoredPosition.y);
         float anchPosX = rTransform.anchoredPosition.x;
-        float newAnchPosX = anchPosX += eventData.delta.x;
+        float newAnchPosX = anchPosX += _eData.delta.x;
 
         if (newAnchPosX < minPosition || newAnchPosX > maxPosition)
         {
@@ -110,6 +218,8 @@ public class SlideHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         }
     }
 
+    #endregion
+
     private void DisplaySnipetNumber()
     {
         snippet.SetActive(true);
@@ -120,7 +230,6 @@ public class SlideHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         sText.text = showableNumber.ToString();
     }
 
-
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("OnEndDrag");
@@ -129,16 +238,39 @@ public class SlideHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         dUManager.FilterDataRange(minSlideHandler.GetShowableNumber(), maxSlideHandler.GetShowableNumber());
     }
 
-    private int CalculateShowableNumber(float incomingBarX)
+    private int CalculateShowableNumber(float _slidePosition)
     {
-        int maxParameter = rData.GetMaxScore() - rData.GetMinScore();
-        showableNumber = Mathf.RoundToInt(((incomingBarX * maxParameter) / maxPosition) + rData.GetMinScore());
+        int maxParameter = 850 - 250;
+        if (maxPosition == 0)
+        {
+            maxPosition = 1;
+        }
+        if (sType == SliderMovType.Horizontal)
+        {
+            showableNumber = Mathf.RoundToInt(((_slidePosition * maxParameter) / maxPosition) + 250);
+        }
+        else
+        {
+            showableNumber = Mathf.RoundToInt(((_slidePosition * maxParameter) / maxPosition) + 250);
+        }
         return showableNumber;
     }
+
     private int CalculateShowableNumber()
     {
-        int maxParameter = rData.GetMaxScore() - rData.GetMinScore();
-        showableNumber = Mathf.RoundToInt(((rTransform.anchoredPosition.x * maxParameter) / maxPosition) + rData.GetMinScore());
+        int maxParameter = 850 - 250;
+        if(maxPosition == 0)
+        {
+            maxPosition = 1;
+        }
+        if (sType == SliderMovType.Horizontal)
+        {
+            showableNumber = Mathf.RoundToInt(((rTransform.anchoredPosition.x * maxParameter) / maxPosition) + 250);
+        }
+        else
+        {
+            showableNumber = Mathf.RoundToInt(((rTransform.anchoredPosition.y * maxParameter) / maxPosition) + 250);
+        }
         return showableNumber;
     }
 
