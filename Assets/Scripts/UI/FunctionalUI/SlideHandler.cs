@@ -160,6 +160,7 @@ public class SlideHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         {
             minSliderTransform.anchoredPosition += eDeltaSinX;
             minSlideHandler.CalculateShowableNumber();
+
             rTransform.anchoredPosition += eDeltaSinX;
             showableNumber = CalculateShowableNumber(newYPosi);
             DisplaySnipetNumber();
@@ -240,35 +241,33 @@ public class SlideHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
     private int CalculateShowableNumber(float _slidePosition)
     {
-        int maxParameter = 850 - 250;
+        int maxParameter = 850;
         if (maxPosition == 0)
         {
             maxPosition = 1;
         }
         if (sType == SliderMovType.Horizontal)
         {
-            showableNumber = Mathf.RoundToInt(((_slidePosition * maxParameter) / maxPosition) + 250);
+            showableNumber = Mathf.RoundToInt(((_slidePosition * maxParameter) / maxPosition));
         }
         else
         {
-            showableNumber = Mathf.RoundToInt(((_slidePosition * maxParameter) / maxPosition) + 250);
+            showableNumber = Mathf.Abs(Mathf.RoundToInt(((_slidePosition * maxParameter) / maxPosition)));
         }
         return showableNumber;
     }
 
     private int CalculateShowableNumber()
     {
-        int maxParameter = 850 - 250;
-        if(maxPosition == 0)
-        {
-            maxPosition = 1;
-        }
+        int maxParameter = 850;
         if (sType == SliderMovType.Horizontal)
         {
+            Debug.Log("Object: " + rTransform.gameObject.name + ".  Transform X = " + rTransform.anchoredPosition.x + ". maxParameter is: " + maxPosition + " + 250");
             showableNumber = Mathf.RoundToInt(((rTransform.anchoredPosition.x * maxParameter) / maxPosition) + 250);
         }
         else
         {
+            Debug.Log("Object: " + rTransform.gameObject.name + ".  Transform Y = " + rTransform.anchoredPosition.y + ". maxParameter is: " + maxPosition + " + 250");
             showableNumber = Mathf.RoundToInt(((rTransform.anchoredPosition.y * maxParameter) / maxPosition) + 250);
         }
         return showableNumber;
