@@ -816,6 +816,18 @@ MonoBehaviour:
   profileUIs:
   - {fileID: 1750758199}
   - {fileID: 1626901797}
+--- !u!114 &371045288 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5830255968187974297, guid: f84399f06bd93114f9e76b81964fcc3d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5830255968221949009}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb63de401d369704290a23a62c36b090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &405406723
 GameObject:
   m_ObjectHideFlags: 0
@@ -2523,7 +2535,6 @@ MonoBehaviour:
   - {fileID: 1353415357}
   - {fileID: 1517135233}
   - {fileID: 735582925}
-  pManager: {fileID: 0}
 --- !u!1 &859340252
 GameObject:
   m_ObjectHideFlags: 0
@@ -3987,6 +3998,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1626901798}
+  - component: {fileID: 1626901799}
   m_Layer: 5
   m_Name: PSUCanvas
   m_TagString: Untagged
@@ -4018,6 +4030,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1626901799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626901797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c9cd261ae1a81a48af2cbf5fe18e7f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chArchitect: {fileID: 371045288}
 --- !u!1 &1646695888
 GameObject:
   m_ObjectHideFlags: 0
@@ -7800,6 +7825,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PSUChart
+      objectReference: {fileID: 0}
+    - target: {fileID: 5830255968187974292, guid: f84399f06bd93114f9e76b81964fcc3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5830255968187974294, guid: f84399f06bd93114f9e76b81964fcc3d,
         type: 3}

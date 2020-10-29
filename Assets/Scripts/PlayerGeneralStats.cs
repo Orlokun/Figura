@@ -18,24 +18,26 @@ public class PlayerProfileData : ScriptableObject
     //ProjectData
     public PsuData psuPData;
 
+    #region Initializers
 
-    void Awake()
+    public void StartData()
     {
-        //GetPsuDataFromJsonToo
-        psuPData = (PsuData)PsuData.CreateInstance(typeof(PsuData));
-
+        if (psuPData == null)
+        {
+            psuPData = (PsuData)PsuData.CreateInstance(typeof(PsuData));
+        }
     }
+
+    #endregion
     #region Getters&Setters
 
-    
+
 
 
     #endregion
     #region JustForTesting
 
-    
 
 
-
-    #endregion  
+    #endregion
 }

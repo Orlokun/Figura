@@ -9,6 +9,7 @@
     }
   ],
   "dependencies": {
+    "com.elringus.unitygoogledrive": "https://github.com/Elringus/UnityGoogleDrive.git#package",
     "com.unity.cinemachine": "2.3.4",
     "com.unity.collab-proxy": "1.2.16",
     "com.unity.ext.nunit": "1.0.0",

@@ -15,37 +15,23 @@ public enum UIGeneralState
 
 public class UIController : MonoBehaviour
 {
-
-
     #region GlobalVariables
     
     [SerializeField]
     GameObject[] uiObjects;
 
     private Dictionary<string, GameObject> uiPanels;
-
     private UIGeneralState actualState;
 
-    //Many of these things shouldn't be here
-    public PlayerManager pManager;
 
-    private ChartArchitect chArchitect;
-
-    private DataUnitsManager dUManager;
     #endregion
 
     #region Awake Functions
     void Awake()
     {
-        dUManager = FindObjectOfType<DataUnitsManager>();
-        chArchitect = FindObjectOfType<ChartArchitect>();
-        pManager = (PlayerManager)PlayerManager.CreateInstance(typeof(PlayerManager));
-        StartPlayerManager();
-
+        GetPlayerProfileData();
         SetInitialUI();
 
-        //Move away from here
-        StartChart();
     }
 
     private void SetInitialUI()
@@ -123,20 +109,9 @@ public class UIController : MonoBehaviour
         UpdateUIState();
     }
 
-    public void StartChart()
+    private void GetPlayerProfileData()
     {
-        chArchitect.InitializeData(pManager.pStats, DataSetType.psu);
-    }
 
-    private void StartPlayerManager()
-    {
-        pManager.GetPlayerDataFromFiles();
-        chArchitect.playerData = pManager.pStats;
-    }
-
-    public void AddNewUnitForVisualization()
-    {
-        dUManager.AddSatisticsUnit();
     }
 
     #endregion

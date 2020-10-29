@@ -821,7 +821,6 @@ C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Boo.Lang.PatternMatch
 C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Boo.Lang.Parser.dll
 C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Boo.Lang.Useful.dll
 C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Newtonsoft.Json.dll
-C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Newtonsoft.Json.xml
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Boo.Lang.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Cinemachine.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\com.unity.cinemachine.editor.dll
@@ -846,3 +845,7 @@ C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Boo.Lang.Useful.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Newtonsoft.Json.xml
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Cinemachine.pdb
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\com.unity.cinemachine.editor.pdb
+C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Elringus.UnityGoogleDrive.Editor.dll
+C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Elringus.UnityGoogleDrive.Runtime.dll
+C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Elringus.UnityGoogleDrive.Editor.pdb
+C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Elringus.UnityGoogleDrive.Runtime.pdb

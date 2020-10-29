@@ -4,11 +4,21 @@ using UnityEngine;
 
 public static class GameManager
 {
-    public static PlayerManager pManager;
+    public static PlayerProfileData pData;
 
-    public static PlayerManager GetPlayerManager()
+
+    public static PlayerProfileData GetPlayerManager()
     {
-        return pManager;
+        return pData;
     }
 
+    public static void SetPlayerManager(PlayerProfileData _pData)
+    {
+        pData = _pData;
+    }
+
+    private static void StartPlayerManager()
+    {
+
+    }
 }
