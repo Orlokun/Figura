@@ -68,6 +68,7 @@
     <Compile Include="Assets\AdvancedPeoplePack2\Scripts\CombinedCharacterSpawner.cs" />
     <Compile Include="Assets\AdvancedPeoplePack2\Scripts\DemoScripts\ColorPicker.cs" />
     <Compile Include="Assets\AdvancedPeoplePack2\Scripts\DemoScripts\UIControllerDEMO.cs" />
+    <Compile Include="Assets\CursosUIController.cs" />
     <Compile Include="Assets\Kevin Iglesias\IKHelperTool\Scripts\IKHelperTool.cs" />
     <Compile Include="Assets\Kevin Iglesias\IKHelperTool\Scripts\IKHelperToolCustomInspector.cs" />
     <Compile Include="Assets\Kevin Iglesias\IKHelperTool\Scripts\IKHelperToolSMB.cs" />

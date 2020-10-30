@@ -6,11 +6,11 @@ using UnityEngine;
 public enum UIGeneralState
 {
     Profile,
+    Cursos,
     ActiveProjects,
-    SearchProject,
-    RecommendedProjects,
+    SearchProjects,
+    Calendar,
     Community,
-    Account,
 }
 
 public class UIController : MonoBehaviour
@@ -31,7 +31,6 @@ public class UIController : MonoBehaviour
     {
         GetPlayerProfileData();
         SetInitialUI();
-
     }
 
     private void SetInitialUI()
@@ -46,22 +45,22 @@ public class UIController : MonoBehaviour
         switch (actualState)
         {
             case UIGeneralState.Profile:
-                SetObjectActiveFromString("Perfil");
+                SetObjectActiveFromString("ProfileUI");
+                break;
+            case UIGeneralState.Cursos:
+                SetObjectActiveFromString("CursosUI");
                 break;
             case UIGeneralState.ActiveProjects:
-                SetObjectActiveFromString("ProyectosActivos");
+                SetObjectActiveFromString("ActiveProjectUI");
                 break;
-            case UIGeneralState.SearchProject:
-                SetObjectActiveFromString("NuevoProyecto");
+            case UIGeneralState.SearchProjects:
+                SetObjectActiveFromString("SearchProjectsUI");
                 break;
-            case UIGeneralState.RecommendedProjects:
-                SetObjectActiveFromString("ProyectosRecomendados");
+            case UIGeneralState.Calendar:
+                SetObjectActiveFromString("CalendarUI");
                 break;
             case UIGeneralState.Community:
-                SetObjectActiveFromString("Comunidad");
-                break;
-            case UIGeneralState.Account:
-                SetObjectActiveFromString("Cuenta");
+                SetObjectActiveFromString("CommunityUI");
                 break;
             default:
                 break;
