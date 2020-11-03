@@ -64,7 +64,7 @@ public class SlideHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
     private void Awake()
     {
-        //Todo Must Check Initial Parameters
+        //TODO: Must Check Initial Parameters
         SetInitialData();
     }
 

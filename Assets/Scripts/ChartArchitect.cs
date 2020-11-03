@@ -59,18 +59,22 @@ public class ChartArchitect : MonoBehaviour
         //JustDoit();
     }
 
-    public void InitializeData(PlayerProfileData pProfile, DataSetType _dType)
+    public void InitializeChart(PlayerProfileData pProfile, DataSetType _dType)
     {
-        SetBasicVariables(pProfile, _dType);
-        GenerateLists();
-        CalculateChartXZPositions();              //Done. Data saved in floats. 
-        InstantiateWithPositionValues();
-        InstantiateTargetCameraObject();
-        CalculateChartGeneralDimensions();
+        if(playerData == null || playerData != pProfile)
+        {
+            SetBasicVariables(pProfile, _dType);
+            GenerateLists();
+            CalculateChartXZPositions();              //Done. Data saved in floats. 
+            InstantiateWithPositionValues();
+            InstantiateTargetCameraObject();
+            CalculateChartGeneralDimensions();
+        }
     }
 
     void SetBasicVariables(PlayerProfileData _pProfile, DataSetType _dType)
     {
+        playerData = _pProfile;                                             //TODO: Set and reset correctly
         switch (_dType)
         {
             case DataSetType.psu:
@@ -160,7 +164,7 @@ public class ChartArchitect : MonoBehaviour
                         EssayResult eResult = kPair.Value;
                         sGraph.actualScore = eResult.GetEssayResult(sGraph.testName);
                         sGraph.SetGraphState(SingleGraphMovState.increasing);
-                        Debug.Log("Success!!!!! in Test named: " + sGraph.testName + " with score: " + sGraph.actualScore);
+                        //Debug.Log("Test named: " + sGraph.testName + " has the score: " + sGraph.actualScore);
                     }
                 }
                 sGraph.UpdateLabelWithScore();
@@ -169,9 +173,6 @@ public class ChartArchitect : MonoBehaviour
                 zAxisGraphs[zPos].Add(sGraph);
             }
         }
-
-        //Adding columns and rows by position **Must be deprecated
-
     }
 
     void GetDesignPSUValues(PlayerProfileData _pProfile)
@@ -191,9 +192,6 @@ public class ChartArchitect : MonoBehaviour
             vCamera.m_Follow = centralObject.transform;
         }
     }
-
-
-
 
     private SingleGraph GetGraphFromchild(GameObject chObject)
     {

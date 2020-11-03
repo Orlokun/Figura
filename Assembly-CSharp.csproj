@@ -91,7 +91,6 @@
     <Compile Include="Assets\Scripts\DataUnits\DataUnit.cs" />
     <Compile Include="Assets\Scripts\DataUnits\DataUnitsManager.cs" />
     <Compile Include="Assets\Scripts\DataUnits\PsuData.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\PlayerGeneralStats.cs" />
     <Compile Include="Assets\Scripts\ProjectData.cs" />
     <Compile Include="Assets\Scripts\RangesManagers\CircleComponent.cs" />
@@ -99,6 +98,7 @@
     <Compile Include="Assets\Scripts\RotatorComponent.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\SingleGraph.cs" />
+    <Compile Include="Assets\Scripts\StaticGameManager.cs" />
     <Compile Include="Assets\Scripts\TestScripts\TestLineanimator.cs" />
     <Compile Include="Assets\Scripts\UI\FunctionalUI\SlideHandler.cs" />
     <Compile Include="Assets\Scripts\UI\FunctionalUI\UIController.cs" />

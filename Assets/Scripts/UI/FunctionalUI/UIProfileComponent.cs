@@ -20,6 +20,9 @@ public class UIProfileComponent : MonoBehaviour
 
     private UIProfileState profileActualState;
 
+    [SerializeField]
+    ChartArchitect chArchitect;
+
     private void Awake()
     {
         SetInitialUI();
@@ -28,6 +31,7 @@ public class UIProfileComponent : MonoBehaviour
     private void SetInitialUI()
     {
         SetPanelsNameDictionary();
+        chArchitect.gameObject.SetActive(false);            //Make sure there is an object assigned first
         profileActualState = UIProfileState.Profile;
         UpdateProfileUIState();
     }
@@ -42,6 +46,8 @@ public class UIProfileComponent : MonoBehaviour
                 break;
             case UIProfileState.PSUData:
                 SetObjectActiveFromString("PSUCanvas");
+                chArchitect.gameObject.SetActive(true);
+                chArchitect.InitializeChart(StaticGameManager.GetPlayerData(), DataSetType.psu);
                 break;
             default:
                 break;
@@ -78,6 +84,7 @@ public class UIProfileComponent : MonoBehaviour
 
     public void NextProfileMenu(bool next)
     {
+        CleanActualProfileStateElements();
         int actualStateInt = (int)profileActualState;
         if (next)
         {
@@ -97,5 +104,30 @@ public class UIProfileComponent : MonoBehaviour
         }
         profileActualState = (UIProfileState)actualStateInt;
         UpdateProfileUIState();
+    }
+
+    void CleanActualProfileStateElements()
+    {
+        switch (profileActualState)
+        {
+            case UIProfileState.Profile:
+                break;
+            case UIProfileState.PSUData:
+                CleanPSUActiveElements();
+                break;
+            case UIProfileState.SkillsData:
+                break;
+            case UIProfileState.ActiveProjectsData:
+                break;
+            case UIProfileState.ArchivedProjectsData:
+                break;
+            case UIProfileState.Personalization:
+                break;
+        }
+    }
+
+    void CleanPSUActiveElements()
+    {
+        chArchitect.gameObject.SetActive(false);
     }
 }

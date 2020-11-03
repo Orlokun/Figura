@@ -110,7 +110,7 @@ public class UIController : MonoBehaviour
 
     private void GetPlayerProfileData()
     {
-
+        StaticGameManager.CreatePlayerDataIfNeeded();
     }
 
     #endregion

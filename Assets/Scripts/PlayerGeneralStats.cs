@@ -24,6 +24,7 @@ public class PlayerProfileData : ScriptableObject
     {
         if (psuPData == null)
         {
+            Debug.Log("I got my PSU Data");
             psuPData = (PsuData)PsuData.CreateInstance(typeof(PsuData));
         }
     }

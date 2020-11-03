@@ -43,7 +43,8 @@ public class SingleGraph : MonoBehaviour
 
     private void Update()
     {
-        lObject.transform.position = new Vector3(transform.position.x, (transform.position.y * 2f) + (lObject.transform.localScale.y), transform.position.z);
+        lObject.transform.position = new Vector3(transform.position.x, (transform.position.y * 2f) + 
+            (lObject.transform.localScale.y), transform.position.z);
         switch (movState)
         {
             case SingleGraphMovState.decreasing:
