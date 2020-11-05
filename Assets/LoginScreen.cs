@@ -1,94 +1,104 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+using Newtonsoft;
+using UnityEngine.UI;
+using TMPro;
 using System.IO;
 using UnityGoogleDrive;
 
 public class LoginScreen : MonoBehaviour
 {
+    #region GlobalVariables
+    #region LoginInputVariables
     [SerializeField]
-    string uploadPath;
+    GameObject userMailObj;
+    [SerializeField]
+    GameObject userPassObj;
 
-    static string appID = "081b9ff2";
-    static string appKeys = "bac6732b71e50ed8ca9ee6180cbbee91";
+    [SerializeField]
+    TMP_Text userMail;
+    [SerializeField]
+    TMP_Text userPass;
+    #endregion
+    string apiAddress = "https://api.edukativa.cl";
+
+    PlayerRawData pLogData;
+    string jLoginData;
 
 
-
-    /*public int ResultsPerPage = 100;
-    private string query = string.Empty;*/
-    private string fileId = string.Empty;
-    private Dictionary<string, string> results;
-
-    private GoogleDriveFiles.GetRequest request;
-    private string result;
-
+    #endregion
     private void Awake()
     {
-        uploadPath = "https://od-api.oxforddictionaries.com/api/v2/entries/ES/<word_id>";
+        CheckBasicSettings();
     }
 
-    public void MakeOxfordrequest()
+    void CheckBasicSettings()
     {
-        
+        userMail = userMailObj.GetComponent<TMP_Text>();
+        userPass = userPassObj.GetComponent<TMP_Text>();
     }
 
-
-
-
-
-    public void GetFile()
+    public void SendLogin()
     {
-        request = GoogleDriveFiles.Get(fileId);
-        request.Fields = new List<string> { "name, size, createdTime" };
-        request.Send().OnDone += BuildResultString;
+        CheckUserLoginParameters();
+        SendRequestToServer();
     }
 
-    private void BuildResultString(UnityGoogleDrive.Data.File file)
+    void SendRequestToServer()
     {
-        result = string.Format("Name: {0} Size: {1:0.00}MB Created: {2:dd.MM.yyyy HH:MM:ss}",
-                file.Name,
-                file.Size * .000001f,
-                file.CreatedTime);
-
-        Debug.Log(result);
+        StartCoroutine(PostRequest(apiAddress, "login", jLoginData));
     }
 
-
-    /*
-    public void ListFiles(string nextPageToken = null)
+    void CheckUserLoginParameters()
     {
-        request = GoogleDriveFiles.List();
-        request.Fields = new List<string> { "nextPageToken, files(id, name, size, createdTime)" };
-        request.PageSize = ResultsPerPage;
-        if (!string.IsNullOrEmpty(query))
-            request.Q = string.Format("name contains '{0}'", query);
-        if (!string.IsNullOrEmpty(nextPageToken))
-            request.PageToken = nextPageToken;
-        request.Send().OnDone += BuildResults;
+        pLogData = ScriptableObject.CreateInstance<PlayerRawData>();
+        pLogData.SetUserPass(userMail.text, userPass.text);     //TODO: Check if Input is Safe
+        jLoginData = JsonUtility.ToJson(pLogData);
+        Debug.Log(jLoginData);
     }
 
-    private void BuildResults(UnityGoogleDrive.Data.FileList fileList)
+    IEnumerator PostRequest(string _apiAddress, string verb, string _jSonData)
     {
-        results = new Dictionary<string, string>();
+        WWWForm form = new WWWForm();
+        form.AddField("username", pLogData.username);
+        form.AddField("password", pLogData.password);
 
-        foreach (var file in fileList.Files)
+        UnityWebRequest www = UnityWebRequest.Post(_apiAddress + "/" + verb, _jSonData);
+
+        yield return www.SendWebRequest();
+        if (www.isNetworkError || www.isHttpError)
         {
-            var fileInfo = string.Format("Name: {0} Size: {1:0.00}MB Created: {2:dd.MM.yyyy}",
-                file.Name,
-                file.Size * .000001f,
-                file.CreatedTime);
-            results.Add(file.Id, fileInfo);
+            Debug.Log(www.error);
         }
-        Debug.Log(result);
+        else
+        {
+            Debug.Log("Form upload complete!");
+        }
+
     }
 
-    private bool NextPageExists()
+    IEnumerator GetRequest(string _apiAddress)
     {
-        return request != null &&
-            request.ResponseData != null &&
-            !string.IsNullOrEmpty(request.ResponseData.NextPageToken);
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(_apiAddress))
+        {
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+
+            string[] pages = _apiAddress.Split('/');
+            int page = pages.Length - 1;
+
+            if (webRequest.isNetworkError)
+            {
+                Debug.Log(pages[page] + ": Error: " + webRequest.error);
+            }
+            else
+            {
+                Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
+            }
+        }
     }
-    */
 }
 
 
