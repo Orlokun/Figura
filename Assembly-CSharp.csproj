@@ -96,6 +96,7 @@
     <Compile Include="Assets\Scripts\ProjectData.cs" />
     <Compile Include="Assets\Scripts\RangesManagers\CircleComponent.cs" />
     <Compile Include="Assets\Scripts\RangesManagers\RangeGenerator.cs" />
+    <Compile Include="Assets\Scripts\RangesManagers\ServerMessageHandler.cs" />
     <Compile Include="Assets\Scripts\RotatorComponent.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\SingleGraph.cs" />

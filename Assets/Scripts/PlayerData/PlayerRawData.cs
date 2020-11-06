@@ -5,13 +5,22 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerLoginStrings", menuName = "PlayerLoginData" )]
 public class PlayerRawData : ScriptableObject
 {
-    public string username;
-    public string password;
+    private LogData uLogData;
+    private string token; 
 
-    public void SetUserPass(string _uName, string _pass)
+    
+    public LogData GetLogData()
     {
-        username = _uName;
-        password = _pass;
+        return uLogData;
     }
 
+    public void SetToken(string _token)
+    {
+        token = _token;
+    }
+
+    public string GetToken()
+    {
+        return token;
+    }
 }

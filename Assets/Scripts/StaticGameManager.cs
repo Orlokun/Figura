@@ -4,8 +4,8 @@ using UnityEngine;
 
 public static class StaticGameManager
 {
-    private static PlayerProfileData pData;
-
+    public static PlayerProfileData pData;
+    public static ServerMessageHandler sMessageHandler;
 
     public static PlayerProfileData GetPlayerData()
     {
@@ -31,10 +31,17 @@ public static class StaticGameManager
         }
     }
 
-    private static void StartPlayerManager()
+    public static void CreateServerInstance()
     {
-
+        if (sMessageHandler != null)
+        {
+            Debug.Log("Already have ServerMessageHandler");
+        }
+        else
+        {
+            sMessageHandler = new ServerMessageHandler();
+            Debug.Log("Creating MHandler!");
+        }
     }
-
 
 }

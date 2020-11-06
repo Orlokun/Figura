@@ -16,20 +16,18 @@ public enum UIGeneralState
 public class UIController : MonoBehaviour
 {
     #region GlobalVariables
-    
     [SerializeField]
     GameObject[] uiObjects;
 
     private Dictionary<string, GameObject> uiPanels;
     private UIGeneralState actualState;
 
-
     #endregion
 
     #region Awake Functions
     void Awake()
     {
-        GetPlayerProfileData();
+        GetPlayerProfileData();             //TODO: This is for initializing. Should be somewhere else
         SetInitialUI();
     }
 
@@ -108,7 +106,7 @@ public class UIController : MonoBehaviour
         UpdateUIState();
     }
 
-    private void GetPlayerProfileData()
+    private void GetPlayerProfileData()             //TODO: This should not be here!  Move Server initialization & PData Creation
     {
         StaticGameManager.CreatePlayerDataIfNeeded();
     }
