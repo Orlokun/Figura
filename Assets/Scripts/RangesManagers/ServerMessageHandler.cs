@@ -83,19 +83,17 @@ public class ServerMessageHandler
 
     static void HandleReceivedMessage(string _action, string incomingJsonMessage)
     {
-
         switch (_action)
         {
             case "login":
-                HandleLoginMessage(incomingJsonMessage);
+                HandleLoginMessageAnswer(incomingJsonMessage);
                 break;
-
             default:
                 return;
         }
     }
 
-    static void HandleLoginMessage(string msg)
+    static void HandleLoginMessageAnswer(string msg)
     {
         pAuthData = new PlayerAuthData();
         JsonUtility.FromJsonOverwrite(msg, pAuthData);

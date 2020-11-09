@@ -220,7 +220,7 @@ RectTransform:
   m_Children:
   - {fileID: 648319802}
   m_Father: {fileID: 406109312}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -809,11 +809,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 558646716}
-  - {fileID: 1702318761}
-  - {fileID: 1054743123}
   - {fileID: 1526955069}
   - {fileID: 191264144}
+  - {fileID: 1054743123}
+  - {fileID: 558646716}
+  - {fileID: 1702318761}
   - {fileID: 314694618}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -835,6 +835,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da29b88da731e9489ba8a6471e46d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiElements:
+  - {fileID: 1526955068}
+  - {fileID: 191264143}
+  - {fileID: 1054743122}
+  - {fileID: 558646715}
+  - {fileID: 1702318760}
   userMailObj: {fileID: 1308837755}
   userPassObj: {fileID: 193186607}
   userMail: {fileID: 0}
@@ -969,7 +975,7 @@ GameObject:
   - component: {fileID: 558646718}
   - component: {fileID: 558646717}
   m_Layer: 5
-  m_Name: Register
+  m_Name: ForgotPass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -988,7 +994,7 @@ RectTransform:
   m_Children:
   - {fileID: 217425461}
   m_Father: {fileID: 406109312}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1835,7 +1841,7 @@ RectTransform:
   m_Children:
   - {fileID: 271973143}
   m_Father: {fileID: 406109312}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2007,7 +2013,7 @@ RectTransform:
   m_Children:
   - {fileID: 1115955326}
   m_Father: {fileID: 406109312}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
