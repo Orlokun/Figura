@@ -15,7 +15,6 @@ public class PlayerAuthData
         return token;
     }
 }
-
 public class ServerMessageHandler
 {
     #region ServerGlobalVariables
@@ -26,9 +25,9 @@ public class ServerMessageHandler
     static PlayerAuthData pAuthData;
 
 
-    #endregion  
+    #endregion
 
-
+    #region SendRequestUtils
     public void SendMessageToServer(MonoBehaviour mb, string _action, string msg, string httpReqType)
     {
         mb.StartCoroutine(Post(_action, msg));
@@ -78,6 +77,7 @@ public class ServerMessageHandler
             return request;
         }
     }
+    #endregion
 
     #region ReceivedMessagesHandler
 

@@ -13,8 +13,8 @@ public struct LogData
         password = _pass;
     }
 }
-
 [CreateAssetMenu(fileName = "PlayerStats", menuName = "PlayerData")]
+
 public class PlayerProfileData : ScriptableObject
 {
     private LogData lData;
@@ -55,11 +55,8 @@ public class PlayerProfileData : ScriptableObject
     {
         return lData;
     }
-
-
-
-
     #endregion
+
     #region JustForTesting
 
 

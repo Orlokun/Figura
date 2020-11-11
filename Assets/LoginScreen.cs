@@ -1,12 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Networking;
-using Newtonsoft;
-using System.Text;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using TMPro;
-using System.IO;
 using UnityEngine.EventSystems;
 
 public class LoginScreen : MonoBehaviour
@@ -17,8 +10,6 @@ public class LoginScreen : MonoBehaviour
     private KeyCode pressedKey;
     private int delayTime = 20;
     private int currentDelay = 0;
-
-
 
     #region LoginInputVariables
     [SerializeField]
@@ -67,7 +58,6 @@ public class LoginScreen : MonoBehaviour
         CheckUserInput();
         CheckInputCorrectness();
     }
-    #endregion
 
     void CheckUserInput()               //TODO: Make a more Scalable System and Set disabled button time
     {
@@ -75,14 +65,16 @@ public class LoginScreen : MonoBehaviour
         if (selectedObject != null)
         {
             int objIndex = GetActiveObjectIndex(selectedObject);
-            if (Input.GetKey(KeyCode.Tab))
+            if (Input.GetKey(KeyCode.Tab) && pressedKey != KeyCode.Tab)
             {
+                pressedKey = KeyCode.Tab;
                 SelectNextUIObject(objIndex);
             }
-
         }
     }
+    #endregion
 
+    #region Utils
     void SelectNextUIObject(int _objIndex)
     {
         if (_objIndex + 1 >= uiElements.Length)
@@ -111,13 +103,11 @@ public class LoginScreen : MonoBehaviour
     {
 
     }
-
     public void SendLogin()
     {
         SetUserLoginParameters();
-        StaticGameManager.sMessageHandler.SendMessageToServer(this,"login", jLoginData, "POST");
+        StaticGameManager.sMessageHandler.SendMessageToServer(this, "login", jLoginData, "POST");
     }
-
     void SetUserLoginParameters()
     {
         StaticGameManager.pData = ScriptableObject.CreateInstance<PlayerProfileData>();
@@ -125,5 +115,6 @@ public class LoginScreen : MonoBehaviour
         jLoginData = JsonUtility.ToJson(StaticGameManager.pData.GetLogData());
         Debug.Log(jLoginData);
     }
-}
 
+    #endregion
+}
