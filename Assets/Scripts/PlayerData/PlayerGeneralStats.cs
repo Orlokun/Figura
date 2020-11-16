@@ -13,11 +13,26 @@ public struct LogData
         password = _pass;
     }
 }
+
+public struct PersonalUniqueData
+{
+    public string name;
+    public float rol;
+    public string id;
+
+    public PersonalUniqueData(string _name, float _rol, string _id)
+    {
+        name = _name;
+        rol = _rol;
+        id = _id;
+    }
+}
 [CreateAssetMenu(fileName = "PlayerStats", menuName = "PlayerData")]
 
 public class PlayerProfileData : ScriptableObject
 {
     private LogData lData;
+    private PersonalUniqueData personalData;
     private string token;
     //General Data
     [SerializeField]

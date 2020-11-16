@@ -111,7 +111,7 @@ public class LoginScreen : MonoBehaviour
     void SetUserLoginParameters()
     {
         StaticGameManager.pData = ScriptableObject.CreateInstance<PlayerProfileData>();
-        StaticGameManager.pData.SetUserLogData(forcedId, forcedPass);     //TODO: Check if Input is Safe. Set Real Data, not Forced
+        StaticGameManager.pData.SetUserLogData(forcedId, forcedPass);                               //TODO: Check if Input is Safe. Set Real Data, not Forced
         jLoginData = JsonUtility.ToJson(StaticGameManager.pData.GetLogData());
         Debug.Log(jLoginData);
     }

@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 using System.Text;
 
 public class PlayerAuthData
-{
+{ 
     public int code;
     public string expire;
     public string token;
@@ -15,27 +15,75 @@ public class PlayerAuthData
         return token;
     }
 }
+
+public struct MeReq
+{
+    public string id;
+
+    public MeReq(string _id)
+    {
+        id = _id;
+    }
+}
+
 public class ServerMessageHandler
 {
     #region ServerGlobalVariables
     [SerializeField]
     static string apiUrl;
+    [SerializeField]
+    static MeReq meReq;
 
     [SerializeField]
     static PlayerAuthData pAuthData;
 
+    [SerializeField]
+    MonoBehaviour myMb;
 
     #endregion
 
     #region SendRequestUtils
     public void SendMessageToServer(MonoBehaviour mb, string _action, string msg, string httpReqType)
     {
-        mb.StartCoroutine(Post(_action, msg));
+        if (myMb != null && myMb.isActiveAndEnabled)
+        {
+            StartRoutineMessaging(httpReqType, _action, msg);
+            
+        }
+        else
+        {
+            myMb = mb;
+            StartRoutineMessaging(httpReqType, _action, msg);
+        }
     }
 
-    public void SetpAuthData(PlayerAuthData _pAuthData)
+    public void SendMessageToServer(string _action, string msg, string httpReqType)
     {
+        if (myMb != null && myMb.isActiveAndEnabled)
+        {
+            StartRoutineMessaging(httpReqType, _action, msg);
+        }
+        else
+        {
+            //TODO: Secure the MB Instance
+            StartRoutineMessaging(httpReqType, _action, msg);
+        }
+    }
 
+
+    public void StartRoutineMessaging(string reqType, string _act, string _msg)
+    {
+        switch(reqType)
+        {
+            case "POST":
+                myMb.StartCoroutine(Post(_act, _msg));
+                break;
+            case "GET":
+                break;
+            //TODO: Build function for other reqTypes
+            default:
+                break;
+        }
     }
 
     public void SetApiUrl(string _inApi)
@@ -88,6 +136,9 @@ public class ServerMessageHandler
             case "login":
                 HandleLoginMessageAnswer(incomingJsonMessage);
                 break;
+            case "users":
+                HandleGetUserMessageAnswer(incomingJsonMessage);
+                break;
             default:
                 return;
         }
@@ -97,8 +148,17 @@ public class ServerMessageHandler
     {
         pAuthData = new PlayerAuthData();
         JsonUtility.FromJsonOverwrite(msg, pAuthData);
-        Debug.Log("pAuthData Ready. token = " + pAuthData.MyToken());
+
+        meReq = new MeReq("me");
+        string jsonId = JsonUtility.ToJson(meReq);
+        StaticGameManager.sMessageHandler.SendMessageToServer("users", jsonId, "POST");
     }
+
+    static void HandleGetUserMessageAnswer(string msg)
+    {
+
+    }
+
 
     #endregion
 }
