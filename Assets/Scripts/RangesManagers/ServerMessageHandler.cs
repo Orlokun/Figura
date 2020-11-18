@@ -16,23 +16,11 @@ public class PlayerAuthData
     }
 }
 
-public struct MeReq
-{
-    public string id;
-
-    public MeReq(string _id)
-    {
-        id = _id;
-    }
-}
-
 public class ServerMessageHandler
 {
     #region ServerGlobalVariables
     [SerializeField]
     static string apiUrl;
-    [SerializeField]
-    static MeReq meReq;
 
     [SerializeField]
     static PlayerAuthData pAuthData;
@@ -42,7 +30,7 @@ public class ServerMessageHandler
 
     #endregion
 
-    #region SendRequestUtils
+    #region SendRequestUtilsAndOverloads
     public void SendMessageToServer(MonoBehaviour mb, string _action, string msg, string httpReqType)
     {
         if (myMb != null && myMb.isActiveAndEnabled)
@@ -71,6 +59,19 @@ public class ServerMessageHandler
     }
 
 
+    public void SendMessageToServerWithoutJSon(string _action, string httpReqType)
+    {
+        if (myMb != null && myMb.isActiveAndEnabled)
+        {
+            StartRoutineMessaging(httpReqType, _action);
+        }
+        else
+        {
+            //TODO: Secure the MB Instance
+            StartRoutineMessaging(httpReqType, _action);
+        }
+    }
+
     public void StartRoutineMessaging(string reqType, string _act, string _msg)
     {
         switch(reqType)
@@ -86,16 +87,52 @@ public class ServerMessageHandler
         }
     }
 
+    public void StartRoutineMessaging(string reqType, string _act)
+    {
+        switch (reqType)
+        {
+            case "POST":
+                myMb.StartCoroutine(Post(_act));
+                break;
+            case "GET":
+                myMb.StartCoroutine(Get(_act));
+                break;
+            //TODO: Build function for other reqTypes
+            default:
+                break;
+        }
+    }
+
     public void SetApiUrl(string _inApi)
     {
         apiUrl = _inApi;
     }
 
+    #region POSTHANDLERS
     static IEnumerator Post(string _action, string bodyJsonString)
     {
         var request = HandlePostRequest(_action);
         byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError)
+        {
+            Debug.LogError("Error: " + request.error);
+        }
+
+        else
+        {
+            HandleReceivedMessage(_action, request.downloadHandler.text);
+        }
+    }
+
+    static IEnumerator Post(string _action)
+    {
+        var request = HandlePostRequest(_action);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
 
@@ -127,8 +164,44 @@ public class ServerMessageHandler
     }
     #endregion
 
-    #region ReceivedMessagesHandler
+    #region GETHANDLERS
 
+    static IEnumerator Get(string _action)
+    {
+        var request = HandleGetRequest(_action);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError)
+        {
+            Debug.LogError("Error: " + request.error);
+        }
+
+        else
+        {
+            HandleReceivedMessage(_action, request.downloadHandler.text);
+        }
+    }
+
+    static UnityWebRequest HandleGetRequest(string _action)
+    {
+        if (_action == "login")
+        {
+            return new UnityWebRequest(apiUrl + "/" + _action, "GET");
+        }
+        else
+        {
+            UnityWebRequest request = new UnityWebRequest(apiUrl + "/" + _action, "GET");
+            request.SetRequestHeader("Authorization", "Bearer " + pAuthData.MyToken());
+            return request;
+        }
+    }
+
+    #endregion
+
+    #region ReceivedMessagesHandler
     static void HandleReceivedMessage(string _action, string incomingJsonMessage)
     {
         switch (_action)
@@ -136,7 +209,7 @@ public class ServerMessageHandler
             case "login":
                 HandleLoginMessageAnswer(incomingJsonMessage);
                 break;
-            case "users":
+            case "users/me":
                 HandleGetUserMessageAnswer(incomingJsonMessage);
                 break;
             default:
@@ -149,16 +222,17 @@ public class ServerMessageHandler
         pAuthData = new PlayerAuthData();
         JsonUtility.FromJsonOverwrite(msg, pAuthData);
 
-        meReq = new MeReq("me");
-        string jsonId = JsonUtility.ToJson(meReq);
-        StaticGameManager.sMessageHandler.SendMessageToServer("users", jsonId, "POST");
+        Debug.Log(pAuthData.code + " / ");
+        StaticGameManager.sMessageHandler.SendMessageToServerWithoutJSon("users/me", "GET");
     }
 
     static void HandleGetUserMessageAnswer(string msg)
     {
-
+        StaticGameManager.pData.SetUniqueData(msg);
     }
 
+
+    #endregion
 
     #endregion
 }

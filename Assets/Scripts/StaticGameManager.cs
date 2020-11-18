@@ -26,7 +26,7 @@ public static class StaticGameManager
         else
         {
             Debug.Log("Creating PDATA!");
-            pData = ScriptableObject.CreateInstance<PlayerProfileData>();
+            pData = new PlayerProfileData();
             pData.StartData();
         }
     }

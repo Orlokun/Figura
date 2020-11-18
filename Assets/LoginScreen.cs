@@ -25,7 +25,7 @@ public class LoginScreen : MonoBehaviour
     EventSystem mEvent;
     #endregion
 
-    string forcedId = "camilo.hernandez@edukativa.cl";
+    string forcedId = "orlando.guerrero@edukativa.cl";
     string forcedPass = "pass123";
 
     string jLoginData;
@@ -110,7 +110,7 @@ public class LoginScreen : MonoBehaviour
     }
     void SetUserLoginParameters()
     {
-        StaticGameManager.pData = ScriptableObject.CreateInstance<PlayerProfileData>();
+        StaticGameManager.pData = new PlayerProfileData();
         StaticGameManager.pData.SetUserLogData(forcedId, forcedPass);                               //TODO: Check if Input is Safe. Set Real Data, not Forced
         jLoginData = JsonUtility.ToJson(StaticGameManager.pData.GetLogData());
         Debug.Log(jLoginData);

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
 
 public struct LogData
 {
@@ -14,25 +15,25 @@ public struct LogData
     }
 }
 
-public struct PersonalUniqueData
+[SerializeField]
+public class User
 {
-    public string name;
-    public float rol;
-    public string id;
-
-    public PersonalUniqueData(string _name, float _rol, string _id)
-    {
-        name = _name;
-        rol = _rol;
-        id = _id;
-    }
+    public string name { get; set; }
+    public int rol { get; set; }
+    public string id { get; set; }
 }
-[CreateAssetMenu(fileName = "PlayerStats", menuName = "PlayerData")]
 
-public class PlayerProfileData : ScriptableObject
+[SerializeField]
+public class ReceivedUserData
+{
+    public bool success { get; set; }
+    public User user { get; set; }
+}
+
+public class PlayerProfileData
 {
     private LogData lData;
-    private PersonalUniqueData personalData;
+    static ReceivedUserData myUser;
     private string token;
     //General Data
     [SerializeField]
@@ -71,6 +72,20 @@ public class PlayerProfileData : ScriptableObject
         return lData;
     }
     #endregion
+
+    public void ReceiveUniqueData(string _msg)
+    {
+        Debug.Log("THIS IS MY MESSAGE: " + _msg);
+
+        ReceivedUserData userData = JsonConvert.DeserializeObject<ReceivedUserData>(_msg);
+        ReceivedUserData uData = userData;
+    }
+
+    public void SetUniqueData(string msg)
+    {
+        ReceiveUniqueData(msg);
+    }
+
 
     #region JustForTesting
 
