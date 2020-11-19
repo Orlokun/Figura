@@ -16,13 +16,15 @@ public class TabGroup : MonoBehaviour
         ResetTabs();
     }
 
-
     public void Subscribe(TabButton _button)
     {
-        if (tButtons == null)
+        if (tButtons.Count == 0)
         {
             tButtons = new List<TabButton>();
             selTab = _button;
+            Color _col;
+            ColorUtility.TryParseHtmlString(onSelColor, out _col);
+            selTab.bGround.color = _col;
         }
         tButtons.Add(_button);
     }
