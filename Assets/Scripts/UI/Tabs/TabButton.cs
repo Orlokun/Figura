@@ -9,8 +9,10 @@ using System;
 public class TabButton : MonoBehaviour,IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
 {
     public TabGroup tGroup;
-
     public Image bGround;
+    public bool isStartingButton;
+
+
     void Awake()
     {
         bGround = GetComponent<Image>();

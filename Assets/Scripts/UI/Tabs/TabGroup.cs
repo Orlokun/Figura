@@ -7,12 +7,13 @@ public class TabGroup : MonoBehaviour
     public TabButton selTab;
     public List<TabButton> tButtons;
 
-    private string onSelColor = "#88F3FA";
+    private string onSelColor = "#CDF5EE";
     private string onEnterColor = "#ECECEC";
     private string onExitColor = "#FFFFFF";
 
     private void Start()
     {
+        SortList();
         ResetTabs();
     }
 
@@ -21,6 +22,9 @@ public class TabGroup : MonoBehaviour
         if (tButtons.Count == 0)
         {
             tButtons = new List<TabButton>();
+        }
+        if (_button.isStartingButton)
+        {
             selTab = _button;
             Color _col;
             ColorUtility.TryParseHtmlString(onSelColor, out _col);
@@ -84,5 +88,10 @@ public class TabGroup : MonoBehaviour
                 tButton.bGround.color = _col;
             }
         }
+    }
+
+    public void SortList()
+    {
+        tButtons.Reverse();
     }
 }
