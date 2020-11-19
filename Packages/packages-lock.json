@@ -7,6 +7,12 @@
       "dependencies": {},
       "hash": "f703ff1c608162a8e7ce8374467fc792e5a2b2b1"
     },
+    "com.unity.2d.sprite": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
     "com.unity.cinemachine": {
       "version": "2.3.4",
       "depth": 0,
