@@ -852,3 +852,6 @@ C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Elringus.UnityGoogleDrive.
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Elringus.UnityGoogleDrive.Runtime.dll
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Elringus.UnityGoogleDrive.Editor.pdb
 C:\Users\oguer\Documents\GitHub\figura\Temp\bin\Debug\Elringus.UnityGoogleDrive.Runtime.pdb
+C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Unity.2D.Sprite.Editor.dll
+C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\GMR User\Documents\GitGames\figura\Temp\bin\Debug\Unity.2D.Sprite.Editor.pdb

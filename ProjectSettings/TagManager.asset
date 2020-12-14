@@ -7,6 +7,7 @@ TagManager:
   - DimensionGuideLine
   - RangesObject
   - Canvas
+  - PopUp
   layers:
   - Default
   - TransparentFX
