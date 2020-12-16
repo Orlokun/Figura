@@ -15,10 +15,6 @@ public class UILeanTweenManager : MonoBehaviour
         {
             instance = this;
         }
-        _animObject = GameObject.Find("ArchivedViewport");
-        LeanTween.scale(_animObject.GetComponent<RectTransform>(), _animObject.GetComponent<RectTransform>().localScale * 0.1f, 0.01f);
-        Debug.Log(_animObject.GetComponent<RectTransform>().localScale);
-        ScaleAnimate();
     }
 
     public static void ScaleAnimate(GameObject _animObject)

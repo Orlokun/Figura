@@ -5368,6 +5368,12 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1517675083, guid: d9f5125e174a1574db4435c7866ee6c9, type: 3}
+      propertyPath: m_Text
+      value: 'Calendario
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 1531282735, guid: d9f5125e174a1574db4435c7866ee6c9, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.000045776367
@@ -6523,22 +6529,22 @@ PrefabInstance:
     - target: {fileID: 7825529294290453154, guid: a3f8b16b992b741418dd4d463efcb9d0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -235
+      value: -227.5
       objectReference: {fileID: 0}
     - target: {fileID: 7825529294290453154, guid: a3f8b16b992b741418dd4d463efcb9d0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 330
+      value: 331.25
       objectReference: {fileID: 0}
     - target: {fileID: 7825529294290453154, guid: a3f8b16b992b741418dd4d463efcb9d0,
         type: 3}
       propertyPath: m_Pivot.x
-      value: 0.24233297
+      value: 0.25054765
       objectReference: {fileID: 0}
     - target: {fileID: 7825529294290453154, guid: a3f8b16b992b741418dd4d463efcb9d0,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 1.1304971
+      value: 1.1328872
       objectReference: {fileID: 0}
     - target: {fileID: 7825529294342523833, guid: a3f8b16b992b741418dd4d463efcb9d0,
         type: 3}
