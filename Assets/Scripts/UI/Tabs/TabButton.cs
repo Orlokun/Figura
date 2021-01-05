@@ -12,6 +12,9 @@ public class TabButton : MonoBehaviour,IPointerEnterHandler, IPointerClickHandle
     public Image bGround;
     public bool isStartingButton;
 
+    public GameObject[] rotatingObjects;
+    public GameObject[] displayableObjects;
+
 
     void Awake()
     {
@@ -27,6 +30,7 @@ public class TabButton : MonoBehaviour,IPointerEnterHandler, IPointerClickHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log("Pointer is inside ME: " + gameObject.name + " !!!!!!");
         tGroup.OnTabEnter(this);
     }
 

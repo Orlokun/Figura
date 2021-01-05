@@ -6,9 +6,6 @@ public class UILeanTweenManager : MonoBehaviour
 {
     public static UILeanTweenManager instance;
 
-    //DeleteThisTest
-    public static GameObject _animObject;
-
     void Awake()
     {
         if (instance == null)
@@ -17,13 +14,18 @@ public class UILeanTweenManager : MonoBehaviour
         }
     }
 
-    public static void ScaleAnimate(GameObject _animObject)
+    public static void ScaleAnimate(GameObject _obj)
     {
-        LeanTween.scale(_animObject.GetComponent<RectTransform>(), _animObject.GetComponent<RectTransform>().localScale * 4f, 1f).setDelay(2f);
+        LeanTween.scale(_obj.GetComponent<RectTransform>(), _obj.GetComponent<RectTransform>().localScale * 4f, 1f).setDelay(2f);
     }
 
-    public static void ScaleAnimate()
+    public static void ScaleAnimate(GameObject _obj, Vector2 finalSize, float time)
     {
-        LeanTween.scale(_animObject.GetComponent<RectTransform>(), _animObject.GetComponent<RectTransform>().localScale * 1f, 1f).setDelay(2f);
+        LeanTween.scale(_obj.GetComponent<RectTransform>(), _obj.GetComponent<RectTransform>().localScale * 1f, 1f).setDelay(2f);
+    }
+
+    public static void MoveAnimate(GameObject _obj, float xVal, float time)
+    {
+        LeanTween.moveLocalX(_obj, xVal, time);
     }
 }

@@ -149,8 +149,10 @@
     <Compile Include="Assets\Scripts\UI\NotUsed\ScrollDetailTexture.cs" />
     <Compile Include="Assets\Scripts\UI\NotUsed\ShowSliderValue.cs" />
     <Compile Include="Assets\Scripts\UI\NotUsed\TiltWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\Tabs\HorizontalTabGroupIcon.cs" />
     <Compile Include="Assets\Scripts\UI\Tabs\TabButton.cs" />
     <Compile Include="Assets\Scripts\UI\Tabs\TabGroup.cs" />
+    <Compile Include="Assets\Scripts\UI\Tabs\VerticalTabGroup.cs" />
     <Compile Include="Assets\Scripts\UI\TestMenus\PageController.cs" />
     <Compile Include="Assets\Scripts\UI\TestMenus\PageType.cs" />
     <Compile Include="Assets\Scripts\UI\TestMenus\TestMenu.cs" />
