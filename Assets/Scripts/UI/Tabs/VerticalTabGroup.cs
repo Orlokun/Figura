@@ -43,9 +43,10 @@ public class VerticalTabGroup : TabGroup
 
     public override void OnTabExit(TabButton _button)
     {
+        Debug.Log("Im out of:  " + _button.gameObject.name);
         StartCoroutine(ButtonExitWait(exitDelaytime, _button));
-
     }
+
     protected IEnumerator ButtonExitWait(float exitDelaytime, TabButton _button)
     {
         yield return new WaitForSeconds(exitDelaytime);

@@ -66,16 +66,7 @@ public class TabGroup : MonoBehaviour
 
     public virtual void OnTabExit(TabButton _button)
     {
-        ResetTabs();
-        Color _col;
-        ColorUtility.TryParseHtmlString(onExitColor, out _col);
-        foreach (TabButton tButton in tButtons)
-        {
-            if (tButton == _button && selTab != _button)
-            {
-                tButton.bGround.color = _col;
-            }
-        }
+
     }
 
     protected virtual void ResetTabs()
